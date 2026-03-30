@@ -56,6 +56,23 @@
       width: 100%;
       max-width: 980px;
     }
+    @media (max-width: 768px) {
+      .hero { height: 520px; }
+      .hero-content { padding: 0 16px; }
+      .booking-widget {
+        flex-direction: column;
+        padding: 20px;
+        gap: 16px;
+        align-items: stretch;
+      }
+      .bw-field {
+        padding: 0;
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.12);
+        padding-bottom: 12px;
+      }
+      .bw-btn { margin-left: 0; width: 100%; padding: 14px; }
+    }
     .bw-field {
       flex: 1;
       display: flex;
@@ -113,14 +130,20 @@
       display: flex;
       align-items: center;
       gap: 48px;
+      flex-wrap: wrap;
     }
     .awards-label {
       font-size: 10px;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--gray);
-      white-space: nowrap;
       flex-shrink: 0;
+    }
+    @media (max-width: 768px) {
+      .awards-section { padding: 24px 16px; }
+      .awards-inner { gap: 20px; }
+      .awards-divider { display: none; }
+      .awards-list { gap: 16px; }
     }
     .awards-divider { width: 1px; height: 40px; background: var(--border); flex-shrink: 0; }
     .awards-list {
@@ -158,6 +181,10 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       min-height: 540px;
+    }
+    @media (max-width: 768px) {
+      .split-section { grid-template-columns: 1fr; min-height: unset; }
+      .split-img { min-height: 280px; }
     }
     .split-text {
       background: var(--cream);
@@ -201,6 +228,14 @@
       gap: 0;
       border: 1px solid var(--border);
     }
+    @media (max-width: 768px) {
+      .brands-section { padding: 48px 16px; }
+      .brands-grid { grid-template-columns: repeat(3, 1fr); }
+      .brand-item { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 20px 8px; }
+    }
+    @media (max-width: 480px) {
+      .brands-grid { grid-template-columns: repeat(2, 1fr); }
+    }
     .brand-item {
       padding: 28px 12px;
       display: flex;
@@ -234,8 +269,14 @@
       justify-content: space-between;
       align-items: flex-end;
       margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
     .properties-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    @media (max-width: 768px) {
+      .properties-section { padding: 48px 16px; }
+      .properties-grid { grid-template-columns: 1fr; }
+    }
     .prop-card-amenities { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
     .amenity-tag {
       font-size: 10px;
@@ -251,6 +292,13 @@
     .difference-inner { max-width: 1200px; margin: 0 auto; }
     .difference-header { text-align: center; margin-bottom: 56px; }
     .difference-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    @media (max-width: 768px) {
+      .difference-section { padding: 48px 16px; }
+      .difference-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .difference-grid { grid-template-columns: 1fr; }
+    }
     .difference-item {
       background: var(--white);
       text-align: center;
@@ -274,6 +322,10 @@
     .testimonials-inner { max-width: 1200px; margin: 0 auto; }
     .testimonials-header { text-align: center; margin-bottom: 48px; }
     .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    @media (max-width: 768px) {
+      .testimonials-section { padding: 48px 16px; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+    }
     .testimonial-card {
       background: var(--white);
       padding: 32px;
@@ -369,6 +421,24 @@
       </div>
     </div>
   </nav>
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" id="menuClose">&times;</button>
+    <a href="locations.html">Locations</a>
+    <a href="offers.html">Offers</a>
+    <a href="extended-stay.html">Extended Stay</a>
+    <a href="#">Business Travel</a>
+    <a href="#">Our Brands</a>
+    <a href="fraser-world.html">Fraser World</a>
+    <a href="#" class="btn-booknow">Book Now</a>
+  </div>
+  <script>
+    const hamburger = document.querySelector(".nav-hamburger");
+    const menu = document.getElementById("mobileMenu");
+    const close = document.getElementById("menuClose");
+    hamburger.addEventListener("click", () => menu.classList.add("open"));
+    close.addEventListener("click", () => menu.classList.remove("open"));
+  </script>
 
   <!-- HERO -->
   <section class="hero">

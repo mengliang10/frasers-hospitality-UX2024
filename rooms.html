@@ -178,6 +178,19 @@
     .lsc-benefit-check { color: var(--gold); font-size: 14px; flex-shrink: 0; }
     .lsc-img { overflow: hidden; height: 320px; }
     .lsc-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  
+    @media (max-width: 768px) {
+      [class*="grid"] { grid-template-columns: 1fr !important; }
+      [class*="split"] { grid-template-columns: 1fr !important; }
+      .section { padding: 40px 16px !important; }
+      .split-text { padding: 40px 24px !important; }
+      .hero { height: auto !important; min-height: 400px; }
+      .hero-content { padding: 24px 16px !important; }
+      .tab-nav { overflow-x: auto; white-space: nowrap; }
+    }
+    @media (max-width: 480px) {
+      [class*="grid"] { grid-template-columns: 1fr !important; }
+    }
   </style>
 </head>
 <body>
@@ -216,6 +229,24 @@
       </div>
     </div>
   </nav>
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" id="menuClose">&times;</button>
+    <a href="locations.html">Locations</a>
+    <a href="offers.html">Offers</a>
+    <a href="extended-stay.html">Extended Stay</a>
+    <a href="#">Business Travel</a>
+    <a href="#">Our Brands</a>
+    <a href="fraser-world.html">Fraser World</a>
+    <a href="#" class="btn-booknow">Book Now</a>
+  </div>
+  <script>
+    const hamburger = document.querySelector(".nav-hamburger");
+    const menu = document.getElementById("mobileMenu");
+    const close = document.getElementById("menuClose");
+    hamburger.addEventListener("click", () => menu.classList.add("open"));
+    close.addEventListener("click", () => menu.classList.remove("open"));
+  </script>
 
   <!-- PAGE HEADER -->
   <div class="rooms-page-header">
