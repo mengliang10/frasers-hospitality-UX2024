@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fraser World Loyalty Programme — Frasers Hospitality</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── HERO ── */
+    .fw-hero {
+      position: relative;
+      height: 560px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .fw-hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('assets/images/suite.png') center/cover no-repeat;
+    }
+    .fw-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.30) 70%, transparent 100%);
+    }
+    .fw-hero-content {
+      position: relative;
+      padding: 0 80px;
+      max-width: 680px;
+    }
+    .fw-hero-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .fw-hero-logo-mark {
+      width: 50px; height: 50px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Georgia', serif;
+      font-size: 18px;
+      color: var(--white);
+    }
+    .fw-hero-logo-text {
+      font-family: 'Georgia', serif;
+      font-size: 22px;
+      color: var(--white);
+      letter-spacing: 2px;
+    }
+    .fw-hero-content h1 { font-size: clamp(30px, 4.5vw, 54px); color: var(--white); margin-bottom: 18px; line-height: 1.1; }
+    .fw-hero-content p { font-size: 16px; color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 36px; max-width: 480px; }
+    .fw-hero-btns { display: flex; gap: 16px; }
+    .fw-hero-stat {
+      position: absolute;
+      bottom: 48px;
+      right: 48px;
+      display: flex;
+      gap: 48px;
+    }
+    .fw-stat-item { text-align: center; }
+    .fw-stat-num { font-family: 'Georgia', serif; font-size: 36px; color: var(--white); display: block; }
+    .fw-stat-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+
+    /* ── BENEFITS INTRO ── */
+    .fw-benefits-intro { padding: 72px 48px; background: var(--white); }
+    .fw-benefits-intro-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
+    .fw-benefits-intro .eyebrow { margin-bottom: 12px; }
+    .fw-benefits-intro h2 { font-size: clamp(26px, 3.5vw, 40px); margin-bottom: 14px; }
+    .fw-benefits-intro p { font-size: 15px; color: var(--gray); max-width: 580px; margin: 0 auto 56px; line-height: 1.7; }
+    .fw-perks-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .fw-perk-item {
+      text-align: center;
+      padding: 32px 20px;
+      border: 1px solid var(--border);
+      transition: box-shadow .3s;
+    }
+    .fw-perk-item:hover { box-shadow: var(--shadow); background: var(--cream); }
+    .fw-perk-icon {
+      width: 56px; height: 56px;
+      background: var(--gold-light);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin: 0 auto 16px;
+    }
+    .fw-perk-item h3 { font-size: 15px; margin-bottom: 8px; }
+    .fw-perk-item p { font-size: 12px; color: var(--gray); line-height: 1.6; }
+
+    /* ── TIER CARDS ── */
+    .fw-tiers { padding: 72px 48px; background: var(--cream); }
+    .fw-tiers-inner { max-width: 1200px; margin: 0 auto; }
+    .fw-tiers-header { text-align: center; margin-bottom: 48px; }
+    .fw-tiers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .fw-tier-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .fw-tier-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .fw-tier-card.featured {
+      border-color: var(--gold);
+      border-width: 2px;
+    }
+    .fw-tier-header {
+      padding: 32px;
+      text-align: center;
+      background: var(--cream);
+    }
+    .fw-tier-card.tier-silver .fw-tier-header { background: #f0f0f0; }
+    .fw-tier-card.tier-gold .fw-tier-header { background: var(--gold-light); }
+    .fw-tier-card.tier-platinum .fw-tier-header { background: var(--footer-bg); }
+    .fw-tier-badge {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+      margin: 0 auto 16px;
+    }
+    .tier-silver .fw-tier-badge { background: #c0c0c0; color: #fff; }
+    .tier-gold .fw-tier-badge { background: var(--gold); color: #fff; }
+    .tier-platinum .fw-tier-badge { background: #5c5c8a; color: #fff; }
+    .fw-tier-name { font-size: 22px; margin-bottom: 4px; }
+    .tier-silver .fw-tier-name { color: var(--dark); }
+    .tier-gold .fw-tier-name { color: var(--gold); }
+    .tier-platinum .fw-tier-name { color: #fff; }
+    .fw-tier-threshold { font-size: 11px; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; }
+    .tier-platinum .fw-tier-threshold { color: rgba(255,255,255,0.6); }
+    .fw-tier-featured-tag {
+      background: var(--gold);
+      color: var(--white);
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 0;
+      text-align: center;
+    }
+    .fw-tier-body { padding: 28px 32px; }
+    .fw-tier-benefits { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+    .fw-tier-benefits li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--dark);
+    }
+    .fw-tier-benefits li::before { content: '✓'; color: var(--gold); font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+    .fw-tier-points {
+      background: var(--cream);
+      padding: 14px 16px;
+      text-align: center;
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+    }
+    .fw-tier-points-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-bottom: 4px; }
+    .fw-tier-points-value { font-family: 'Georgia', serif; font-size: 22px; color: var(--dark); }
+
+    /* ── BENEFITS TABLE ── */
+    .fw-table-section { padding: 72px 48px; background: var(--white); }
+    .fw-table-inner { max-width: 1200px; margin: 0 auto; }
+    .fw-table-header { margin-bottom: 36px; }
+    .benefits-table { width: 100%; border-collapse: collapse; }
+    .benefits-table th {
+      padding: 16px 20px;
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      color: var(--dark);
+    }
+    .benefits-table th:first-child { text-align: left; }
+    .benefits-table th.tier-silver-col { background: #f0f0f0; }
+    .benefits-table th.tier-gold-col { background: var(--gold-light); color: var(--gold); }
+    .benefits-table th.tier-platinum-col { background: var(--footer-bg); color: var(--white); }
+    .benefits-table td {
+      padding: 14px 20px;
+      border: 1px solid var(--border);
+      font-size: 13px;
+      text-align: center;
+      color: var(--dark);
+    }
+    .benefits-table td:first-child { text-align: left; color: var(--gray); }
+    .benefits-table tr:hover td { background: var(--cream); }
+    .check-yes { color: var(--gold); font-size: 16px; }
+    .check-no { color: var(--border); font-size: 16px; }
+
+    /* ── EARN SECTION ── */
+    .fw-earn { padding: 80px 48px; background: var(--cream); }
+    .fw-earn-inner { max-width: 1200px; margin: 0 auto; }
+    .fw-earn-header { text-align: center; margin-bottom: 56px; }
+    .fw-earn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); border: 1px solid var(--border); }
+    .fw-earn-item {
+      background: var(--white);
+      padding: 40px 32px;
+      text-align: center;
+    }
+    .fw-earn-item:hover { background: var(--cream); }
+    .fw-earn-icon {
+      width: 64px; height: 64px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+      margin: 0 auto 20px;
+      color: var(--white);
+    }
+    .fw-earn-item h3 { font-size: 17px; margin-bottom: 10px; }
+    .fw-earn-item p { font-size: 13px; color: var(--gray); line-height: 1.7; margin-bottom: 12px; }
+    .fw-earn-rate { font-family: 'Georgia', serif; font-size: 22px; color: var(--gold); }
+
+    /* ── PARTNERS ── */
+    .fw-partners { padding: 72px 48px; background: var(--white); }
+    .fw-partners-inner { max-width: 1200px; margin: 0 auto; }
+    .fw-partners-header { text-align: center; margin-bottom: 48px; }
+    .fw-partners-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .fw-partner-card {
+      border: 1px solid var(--border);
+      padding: 28px 20px;
+      text-align: center;
+      transition: box-shadow .3s;
+    }
+    .fw-partner-card:hover { box-shadow: var(--shadow); background: var(--cream); }
+    .fw-partner-icon {
+      width: 60px; height: 60px;
+      background: var(--cream);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 14px;
+    }
+    .fw-partner-card h4 { font-size: 14px; margin-bottom: 6px; }
+    .fw-partner-card p { font-size: 12px; color: var(--gray); line-height: 1.5; }
+
+    /* ── PROPERTY CARDS ── */
+    .fw-properties { padding: 72px 48px; background: var(--cream); }
+    .fw-properties-inner { max-width: 1200px; margin: 0 auto; }
+    .fw-properties-header { margin-bottom: 40px; }
+    .fw-properties-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+    /* ── JOIN CTA ── */
+    .fw-join-cta {
+      background: var(--footer-bg);
+      padding: 96px 48px;
+      text-align: center;
+    }
+    .fw-join-inner { max-width: 640px; margin: 0 auto; }
+    .fw-join-inner .eyebrow { color: var(--gold); margin-bottom: 14px; }
+    .fw-join-inner h2 { font-size: 40px; color: var(--white); margin-bottom: 16px; }
+    .fw-join-inner p { font-size: 15px; color: rgba(255,255,255,0.6); margin-bottom: 40px; line-height: 1.7; }
+    .fw-join-form { display: flex; gap: 0; max-width: 480px; margin: 0 auto 20px; }
+    .fw-join-form input {
+      flex: 1;
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-right: none;
+      color: var(--white);
+      font-size: 14px;
+      outline: none;
+    }
+    .fw-join-form input::placeholder { color: rgba(255,255,255,0.4); }
+    .fw-join-form button {
+      padding: 16px 28px;
+      background: var(--gold);
+      border: none;
+      color: var(--white);
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .fw-join-form button:hover { background: var(--gold-hover); }
+    .fw-join-note { font-size: 11px; color: rgba(255,255,255,0.3); }
+  </style>
+</head>
+<body>
+
+  <!-- UTIL BAR -->
+  <div class="util-bar">
+    <div class="util-left">
+      <a href="#">EN</a>
+      <div class="util-divider"></div>
+      <a href="#">SGD</a>
+      <div class="util-divider"></div>
+      <a href="#">Frasers Hospitality</a>
+    </div>
+    <div class="util-right">
+      <a href="#">My reservations</a>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <span class="nav-hamburger">&#9776;</span>
+      <a href="index.html" class="nav-logo">
+        <span class="brand">Frasers</span>
+        <span class="sub">Hospitality</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="locations.html">Locations</a></li>
+        <li><a href="offers.html">Offers</a></li>
+        <li><a href="extended-stay.html">Extended Stay</a></li>
+        <li><a href="#">Business travel</a></li>
+        <li><a href="#">Our brands</a></li>
+        <li><a href="fraser-world.html" class="active">Fraser World</a></li>
+      </ul>
+      <div class="nav-actions">
+        <span class="nav-icon">&#128269;</span>
+        <span class="nav-icon">&#128100;</span>
+        <a href="#" class="btn-booknow">Book now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="fw-hero">
+    <div class="fw-hero-bg"></div>
+    <div class="fw-hero-overlay"></div>
+    <div class="fw-hero-content">
+      <div class="fw-hero-logo">
+        <div class="fw-hero-logo-mark">FW</div>
+        <span class="fw-hero-logo-text">Fraser World</span>
+      </div>
+      <h1>Your world of rewards, everywhere you stay</h1>
+      <p>Join Fraser World — our global loyalty programme — and earn points on every stay, unlock exclusive member benefits and enjoy elevated experiences across our entire portfolio.</p>
+      <div class="fw-hero-btns">
+        <a href="#join" class="btn btn-gold">Join for free</a>
+        <a href="#" class="btn btn-outline-white">Sign in</a>
+      </div>
+    </div>
+    <div class="fw-hero-stat">
+      <div class="fw-stat-item">
+        <span class="fw-stat-num">140+</span>
+        <span class="fw-stat-label">Properties</span>
+      </div>
+      <div class="fw-stat-item">
+        <span class="fw-stat-num">80+</span>
+        <span class="fw-stat-label">Cities</span>
+      </div>
+      <div class="fw-stat-item">
+        <span class="fw-stat-num">3</span>
+        <span class="fw-stat-label">Membership tiers</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS INTRO -->
+  <section class="fw-benefits-intro">
+    <div class="fw-benefits-intro-inner">
+      <p class="eyebrow">Member benefits</p>
+      <h2>Exclusive member benefits</h2>
+      <p>As a Fraser World member, you'll enjoy privileges that make every stay more rewarding — from the moment you arrive to long after you've checked out.</p>
+      <div class="fw-perks-grid">
+        <div class="fw-perk-item">
+          <div class="fw-perk-icon">&#127775;</div>
+          <h3>Earn on every stay</h3>
+          <p>Accumulate points on room stays, dining and services — and redeem them for free nights or upgrades.</p>
+        </div>
+        <div class="fw-perk-item">
+          <div class="fw-perk-icon">&#128179;</div>
+          <h3>Exclusive member rates</h3>
+          <p>Access member-only rates that are not available anywhere else — guaranteed to be our best price.</p>
+        </div>
+        <div class="fw-perk-item">
+          <div class="fw-perk-icon">&#127968;</div>
+          <h3>Room upgrades</h3>
+          <p>Enjoy complimentary room upgrades based on availability, starting from Gold tier members.</p>
+        </div>
+        <div class="fw-perk-item">
+          <div class="fw-perk-icon">&#128197;</div>
+          <h3>Flexible booking</h3>
+          <p>Benefit from priority early check-in, late checkout and special welcome amenities on arrival.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIERS -->
+  <section class="fw-tiers">
+    <div class="fw-tiers-inner">
+      <div class="fw-tiers-header">
+        <p class="eyebrow">Membership tiers</p>
+        <h2 class="section-title">Choose your tier</h2>
+        <p class="section-sub" style="margin:12px auto 0;text-align:center;">Progress through three membership tiers and unlock increasingly exceptional rewards and recognition.</p>
+      </div>
+      <div class="fw-tiers-grid">
+
+        <!-- Silver -->
+        <div class="fw-tier-card tier-silver">
+          <div class="fw-tier-header">
+            <div class="fw-tier-badge">&#127695;</div>
+            <h3 class="fw-tier-name">Silver</h3>
+            <p class="fw-tier-threshold">From your first stay</p>
+          </div>
+          <div class="fw-tier-body">
+            <div class="fw-tier-points">
+              <p class="fw-tier-points-label">Earn rate</p>
+              <p class="fw-tier-points-value">5 pts per $1</p>
+            </div>
+            <ul class="fw-tier-benefits">
+              <li>Member-exclusive rates</li>
+              <li>Earn points on all stays</li>
+              <li>Free Wi-Fi at all properties</li>
+              <li>Birthday bonus points</li>
+              <li>Digital membership card</li>
+            </ul>
+            <a href="#join" class="btn btn-outline-dark" style="width:100%;text-align:center;display:block;padding:12px;">Join now — free</a>
+          </div>
+        </div>
+
+        <!-- Gold -->
+        <div class="fw-tier-card tier-gold featured">
+          <div class="fw-tier-featured-tag">Most popular</div>
+          <div class="fw-tier-header">
+            <div class="fw-tier-badge">&#127945;</div>
+            <h3 class="fw-tier-name">Gold</h3>
+            <p class="fw-tier-threshold">From 20,000 pts / year</p>
+          </div>
+          <div class="fw-tier-body">
+            <div class="fw-tier-points">
+              <p class="fw-tier-points-label">Earn rate</p>
+              <p class="fw-tier-points-value">8 pts per $1</p>
+            </div>
+            <ul class="fw-tier-benefits">
+              <li>Everything in Silver</li>
+              <li>Complimentary room upgrade</li>
+              <li>Early check-in (from 12pm)</li>
+              <li>Late checkout (until 2pm)</li>
+              <li>Welcome amenity on arrival</li>
+              <li>15% F&amp;B discount</li>
+              <li>Gold hotline access</li>
+            </ul>
+            <a href="#join" class="btn btn-gold" style="width:100%;text-align:center;display:block;padding:12px;">Join now — free</a>
+          </div>
+        </div>
+
+        <!-- Platinum -->
+        <div class="fw-tier-card tier-platinum">
+          <div class="fw-tier-header">
+            <div class="fw-tier-badge">&#9733;</div>
+            <h3 class="fw-tier-name">Platinum</h3>
+            <p class="fw-tier-threshold">From 50,000 pts / year</p>
+          </div>
+          <div class="fw-tier-body">
+            <div class="fw-tier-points">
+              <p class="fw-tier-points-label">Earn rate</p>
+              <p class="fw-tier-points-value">12 pts per $1</p>
+            </div>
+            <ul class="fw-tier-benefits">
+              <li>Everything in Gold</li>
+              <li>Guaranteed room upgrade</li>
+              <li>Early check-in (from 10am)</li>
+              <li>Late checkout (until 4pm)</li>
+              <li>20% F&amp;B discount</li>
+              <li>Dedicated Platinum host</li>
+              <li>Annual free night reward</li>
+              <li>Exclusive Platinum events</li>
+            </ul>
+            <a href="#join" class="btn btn-outline-gold" style="width:100%;text-align:center;display:block;padding:12px;">Join now — free</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS TABLE -->
+  <section class="fw-table-section">
+    <div class="fw-table-inner">
+      <div class="fw-table-header">
+        <p class="eyebrow">Compare tiers</p>
+        <h2 class="section-title">Benefits comparison</h2>
+      </div>
+      <table class="benefits-table">
+        <thead>
+          <tr>
+            <th style="width:40%;">Benefit</th>
+            <th class="tier-silver-col">Silver</th>
+            <th class="tier-gold-col">Gold</th>
+            <th class="tier-platinum-col">Platinum</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Member-exclusive rates</td><td><span class="check-yes">&#10003;</span></td><td><span class="check-yes">&#10003;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+          <tr><td>Points earning rate</td><td>5 pts/$1</td><td>8 pts/$1</td><td>12 pts/$1</td></tr>
+          <tr><td>Free Wi-Fi</td><td><span class="check-yes">&#10003;</span></td><td><span class="check-yes">&#10003;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+          <tr><td>Room upgrade (on availability)</td><td><span class="check-no">—</span></td><td><span class="check-yes">&#10003;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+          <tr><td>Guaranteed room upgrade</td><td><span class="check-no">—</span></td><td><span class="check-no">—</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+          <tr><td>Early check-in</td><td><span class="check-no">—</span></td><td>From 12pm</td><td>From 10am</td></tr>
+          <tr><td>Late checkout</td><td><span class="check-no">—</span></td><td>Until 2pm</td><td>Until 4pm</td></tr>
+          <tr><td>F&amp;B discount</td><td><span class="check-no">—</span></td><td>15%</td><td>20%</td></tr>
+          <tr><td>Welcome amenity</td><td><span class="check-no">—</span></td><td><span class="check-yes">&#10003;</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+          <tr><td>Annual free night reward</td><td><span class="check-no">—</span></td><td><span class="check-no">—</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+          <tr><td>Dedicated personal host</td><td><span class="check-no">—</span></td><td><span class="check-no">—</span></td><td><span class="check-yes">&#10003;</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- EARN SECTION -->
+  <section class="fw-earn">
+    <div class="fw-earn-inner">
+      <div class="fw-earn-header">
+        <p class="eyebrow">Earn points</p>
+        <h2 class="section-title">Earn your next getaway</h2>
+        <p class="section-sub" style="margin:12px auto 0;text-align:center;">Points add up quickly. Earn on stays, dining, spa and more — then redeem for free nights, upgrades or exclusive experiences.</p>
+      </div>
+      <div class="fw-earn-grid">
+        <div class="fw-earn-item">
+          <div class="fw-earn-icon">&#127968;</div>
+          <h3>Room stays</h3>
+          <p>Earn points on every night you stay across all Frasers Hospitality properties worldwide.</p>
+          <p class="fw-earn-rate">5–12 pts / $1</p>
+        </div>
+        <div class="fw-earn-item">
+          <div class="fw-earn-icon">&#127860;</div>
+          <h3>Dining &amp; F&amp;B</h3>
+          <p>Earn points when you dine at our in-property restaurants, bars and room service.</p>
+          <p class="fw-earn-rate">3–6 pts / $1</p>
+        </div>
+        <div class="fw-earn-item">
+          <div class="fw-earn-icon">&#127774;</div>
+          <h3>Spa &amp; wellness</h3>
+          <p>Points earned on spa treatments, fitness classes and wellness services at our properties.</p>
+          <p class="fw-earn-rate">3–6 pts / $1</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNER REWARDS -->
+  <section class="fw-partners">
+    <div class="fw-partners-inner">
+      <div class="fw-partners-header">
+        <p class="eyebrow">Partner network</p>
+        <h2 class="section-title">Partner rewards</h2>
+        <p class="section-sub" style="margin:12px auto 0;text-align:center;">Expand your earning and redemption opportunities with our growing network of travel and lifestyle partners.</p>
+      </div>
+      <div class="fw-partners-grid">
+        <div class="fw-partner-card">
+          <div class="fw-partner-icon">&#9992;</div>
+          <h4>Airline Partners</h4>
+          <p>Earn and redeem miles with 15+ leading global airlines including Singapore Airlines and British Airways.</p>
+        </div>
+        <div class="fw-partner-card">
+          <div class="fw-partner-icon">&#128663;</div>
+          <h4>Car Rental</h4>
+          <p>Exclusive rates and bonus points with Hertz, Avis and Enterprise at airports worldwide.</p>
+        </div>
+        <div class="fw-partner-card">
+          <div class="fw-partner-icon">&#127947;</div>
+          <h4>Wellness &amp; Fitness</h4>
+          <p>Discounts and points at premium gym and wellness brands in cities where we operate.</p>
+        </div>
+        <div class="fw-partner-card">
+          <div class="fw-partner-icon">&#127871;</div>
+          <h4>Dining Partners</h4>
+          <p>Earn bonus points at 500+ partner restaurants across Asia Pacific, Europe and the Middle East.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISCOVER PARTNER PROPERTIES -->
+  <section class="fw-properties">
+    <div class="fw-properties-inner">
+      <div class="fw-properties-header">
+        <p class="eyebrow">Earn at our properties</p>
+        <h2 class="section-title">Discover our partner properties</h2>
+      </div>
+      <div class="fw-properties-grid">
+        <div class="prop-card">
+          <div class="prop-card-img">
+            <img src="assets/images/lobby.png" alt="Fraser Suites Singapore">
+          </div>
+          <div class="prop-card-body">
+            <p class="prop-card-tag">Fraser Suites</p>
+            <h3 class="prop-card-name">Fraser Suites Singapore</h3>
+            <p class="prop-card-loc">&#127961; Singapore</p>
+            <div style="margin-top:14px;display:flex;justify-content:space-between;align-items:center;">
+              <div class="prop-card-price">From <strong>$320</strong>/night</div>
+              <a href="property.html" class="btn btn-outline-gold" style="padding:7px 14px;font-size:11px;">View</a>
+            </div>
+          </div>
+        </div>
+        <div class="prop-card">
+          <div class="prop-card-img">
+            <img src="assets/images/suite.png" alt="Capri by Fraser Dubai">
+          </div>
+          <div class="prop-card-body">
+            <p class="prop-card-tag">Capri by Fraser</p>
+            <h3 class="prop-card-name">Capri by Fraser, Dubai</h3>
+            <p class="prop-card-loc">&#127961; Dubai, UAE</p>
+            <div style="margin-top:14px;display:flex;justify-content:space-between;align-items:center;">
+              <div class="prop-card-price">From <strong>$280</strong>/night</div>
+              <a href="property.html" class="btn btn-outline-gold" style="padding:7px 14px;font-size:11px;">View</a>
+            </div>
+          </div>
+        </div>
+        <div class="prop-card">
+          <div class="prop-card-img">
+            <img src="assets/images/room-classic.png" alt="Fraser Suites Glasgow">
+          </div>
+          <div class="prop-card-body">
+            <p class="prop-card-tag">Fraser Suites</p>
+            <h3 class="prop-card-name">Fraser Suites Glasgow</h3>
+            <p class="prop-card-loc">&#127961; Glasgow, UK</p>
+            <div style="margin-top:14px;display:flex;justify-content:space-between;align-items:center;">
+              <div class="prop-card-price">From <strong>£195</strong>/night</div>
+              <a href="property.html" class="btn btn-outline-gold" style="padding:7px 14px;font-size:11px;">View</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN CTA -->
+  <section class="fw-join-cta" id="join">
+    <div class="fw-join-inner">
+      <p class="eyebrow">Join today</p>
+      <h2>Start earning your way</h2>
+      <p>Membership is completely free. Sign up today and your points start accumulating from your very first stay.</p>
+      <div class="fw-join-form">
+        <input type="email" placeholder="Enter your email address">
+        <button type="submit">Join free</button>
+      </div>
+      <p class="fw-join-note">By signing up you agree to our <a href="#" style="color:var(--gold);">Terms &amp; Conditions</a> and <a href="#" style="color:var(--gold);">Privacy Policy</a>.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>For Guests</h4>
+        <ul>
+          <li><a href="#">Best Rate Guarantee</a></li>
+          <li><a href="#">Fraser World</a></li>
+          <li><a href="#">Long Stay</a></li>
+          <li><a href="#">Business Travel</a></li>
+          <li><a href="#">Fraser Cachet</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>For Corporate</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Business Development</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Brands</h4>
+        <ul>
+          <li><a href="#">Fraser Suites</a></li>
+          <li><a href="#">Fraser Residence</a></li>
+          <li><a href="#">Fraser Place</a></li>
+          <li><a href="#">Capri by Fraser</a></li>
+          <li><a href="#">Modena by Fraser</a></li>
+          <li><a href="#">Malmaison</a></li>
+          <li><a href="#">Hotel Du Vin &amp; Bistro</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy policy</a></li>
+          <li><a href="#">Cookie declaration</a></li>
+          <li><a href="#">Terms of use</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Sitemap</a></li>
+        </ul>
+      </div>
+      <div class="footer-brand-col">
+        <div class="footer-logo">Frasers <span>Hospitality</span></div>
+        <p class="footer-address">438 Alexandra Road, Alexandra Point Level 18, Singapore 119958</p>
+        <a class="footer-email" href="mailto:feedback@frashospitality.com">feedback@frashospitality.com</a>
+        <div class="footer-social">
+          <a href="#">f</a><a href="#">t</a><a href="#">y</a><a href="#">in</a><a href="#">ig</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Frasers Hospitality Pte Ltd. A member of Frasers Property Group.</span>
+      <div style="display:flex;gap:20px;">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

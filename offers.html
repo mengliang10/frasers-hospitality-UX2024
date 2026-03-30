@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Best Offers &amp; Deals — Frasers Hospitality</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── OFFERS HERO ── */
+    .offers-hero {
+      position: relative;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .offers-hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('assets/images/room-modern.png') center/cover no-repeat;
+    }
+    .offers-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.3) 60%, transparent 100%);
+    }
+    .offers-hero-content {
+      position: relative;
+      padding: 0 48px;
+      max-width: 600px;
+    }
+    .offers-hero-content .eyebrow { color: var(--gold); margin-bottom: 12px; }
+    .offers-hero-content h1 { font-size: clamp(28px, 4vw, 48px); color: var(--white); margin-bottom: 14px; line-height: 1.15; }
+    .offers-hero-content p { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.7; max-width: 440px; }
+
+    /* ── FILTER BAR ── */
+    .offers-filter {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px;
+      position: sticky;
+      top: 64px;
+      z-index: 100;
+    }
+    .offers-filter-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      overflow-x: auto;
+    }
+    .offer-filter-btn {
+      padding: 18px 22px;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      color: var(--gray);
+      border: none;
+      background: none;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+      transition: color .2s, border-color .2s;
+    }
+    .offer-filter-btn:hover { color: var(--dark); }
+    .offer-filter-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    /* ── OFFERS GRID ── */
+    .offers-section { padding: 56px 48px 80px; background: var(--cream); }
+    .offers-inner { max-width: 1200px; margin: 0 auto; }
+    .offers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .offer-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: box-shadow .3s, transform .3s;
+    }
+    .offer-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-3px);
+    }
+    .offer-card-img {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+    }
+    .offer-card-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .5s;
+      display: block;
+    }
+    .offer-card:hover .offer-card-img img { transform: scale(1.05); }
+    .offer-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: var(--gold);
+      color: var(--white);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+    }
+    .offer-card-body { padding: 24px; }
+    .offer-card-category {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .offer-card-name { font-size: 19px; margin-bottom: 8px; line-height: 1.3; }
+    .offer-card-desc { font-size: 13px; color: var(--gray); line-height: 1.7; margin-bottom: 20px; }
+    .offer-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .offer-expiry { font-size: 11px; color: var(--gray); }
+    .offer-expiry strong { color: var(--dark); }
+
+    /* FEATURED OFFER (large card) */
+    .offer-card.featured {
+      grid-column: span 2;
+    }
+    .offer-card.featured .offer-card-img {
+      height: 300px;
+    }
+    .offer-card.featured .offer-card-name { font-size: 24px; }
+    .offer-card.featured .offer-card-desc { max-width: 500px; }
+  </style>
+</head>
+<body>
+
+  <!-- UTIL BAR -->
+  <div class="util-bar">
+    <div class="util-left">
+      <a href="#">EN</a>
+      <div class="util-divider"></div>
+      <a href="#">SGD</a>
+      <div class="util-divider"></div>
+      <a href="#">Frasers Hospitality</a>
+    </div>
+    <div class="util-right">
+      <a href="#">My reservations</a>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <span class="nav-hamburger">&#9776;</span>
+      <a href="index.html" class="nav-logo">
+        <span class="brand">Frasers</span>
+        <span class="sub">Hospitality</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="locations.html">Locations</a></li>
+        <li><a href="offers.html" class="active">Offers</a></li>
+        <li><a href="extended-stay.html">Extended Stay</a></li>
+        <li><a href="#">Business travel</a></li>
+        <li><a href="#">Our brands</a></li>
+        <li><a href="fraser-world.html">Fraser World</a></li>
+      </ul>
+      <div class="nav-actions">
+        <span class="nav-icon">&#128269;</span>
+        <span class="nav-icon">&#128100;</span>
+        <a href="#" class="btn-booknow">Book now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="offers-hero">
+    <div class="offers-hero-bg"></div>
+    <div class="offers-hero-overlay"></div>
+    <div class="offers-hero-content">
+      <p class="eyebrow">Exclusive deals</p>
+      <h1>Best deals anytime, anywhere</h1>
+      <p>Unlock exceptional value when you book direct. From advance purchase savings to seasonal getaways — find the offer that's right for you.</p>
+    </div>
+  </section>
+
+  <!-- FILTER BAR -->
+  <div class="offers-filter">
+    <div class="offers-filter-inner">
+      <button class="offer-filter-btn active">All offers</button>
+      <button class="offer-filter-btn">Advance purchase</button>
+      <button class="offer-filter-btn">Celebrating</button>
+      <button class="offer-filter-btn">Sweet dreams</button>
+      <button class="offer-filter-btn">Extended stay</button>
+      <button class="offer-filter-btn">Fraser World</button>
+      <button class="offer-filter-btn">Seasonal</button>
+      <button class="offer-filter-btn">Family</button>
+    </div>
+  </div>
+
+  <!-- OFFERS GRID -->
+  <section class="offers-section">
+    <div class="offers-inner">
+      <div class="offers-grid">
+
+        <!-- Featured offer -->
+        <div class="offer-card featured">
+          <div class="offer-card-img">
+            <img src="assets/images/suite.png" alt="Advance Purchase Rate">
+            <span class="offer-badge">Up to 20% off</span>
+          </div>
+          <div class="offer-card-body">
+            <p class="offer-card-category">Advance purchase</p>
+            <h2 class="offer-card-name">Advance Purchase — Your Best Rate</h2>
+            <p class="offer-card-desc">Book at least 21 days in advance and enjoy savings of up to 20% off our standard rates. The earlier you book, the more you save. Available across all participating properties worldwide.</p>
+            <div class="offer-card-footer">
+              <p class="offer-expiry">Valid until: <strong>31 Dec 2025</strong></p>
+              <a href="#" class="btn btn-gold">View offer</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Offer 2 -->
+        <div class="offer-card">
+          <div class="offer-card-img">
+            <img src="assets/images/room-classic.png" alt="Sweet Dreams Package">
+            <span class="offer-badge">Exclusive</span>
+          </div>
+          <div class="offer-card-body">
+            <p class="offer-card-category">Sweet dreams</p>
+            <h2 class="offer-card-name">The Sweet Dreams Package</h2>
+            <p class="offer-card-desc">Wake up refreshed with our luxurious bedding upgrade, late checkout and complimentary breakfast for two.</p>
+            <div class="offer-card-footer">
+              <p class="offer-expiry">Valid until: <strong>30 Jun 2025</strong></p>
+              <a href="#" class="btn btn-outline-gold" style="padding:9px 18px;font-size:11px;">View offer</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Offer 3 -->
+        <div class="offer-card">
+          <div class="offer-card-img">
+            <img src="assets/images/lobby.png" alt="Celebrating You">
+            <span class="offer-badge">Special</span>
+          </div>
+          <div class="offer-card-body">
+            <p class="offer-card-category">Celebrating</p>
+            <h2 class="offer-card-name">Celebrating You</h2>
+            <p class="offer-card-desc">Mark your milestone in style. Enjoy a complimentary upgrade, champagne on arrival and a personalised keepsake.</p>
+            <div class="offer-card-footer">
+              <p class="offer-expiry">Valid until: <strong>Ongoing</strong></p>
+              <a href="#" class="btn btn-outline-gold" style="padding:9px 18px;font-size:11px;">View offer</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Offer 4 -->
+        <div class="offer-card">
+          <div class="offer-card-img">
+            <img src="assets/images/family.png" alt="Family Stays">
+          </div>
+          <div class="offer-card-body">
+            <p class="offer-card-category">Family</p>
+            <h2 class="offer-card-name">Family Retreats</h2>
+            <p class="offer-card-desc">Children stay free and enjoy complimentary activities. Our spacious two-bedroom apartments are perfect for the whole family.</p>
+            <div class="offer-card-footer">
+              <p class="offer-expiry">Valid until: <strong>31 Aug 2025</strong></p>
+              <a href="#" class="btn btn-outline-gold" style="padding:9px 18px;font-size:11px;">View offer</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Offer 5 -->
+        <div class="offer-card">
+          <div class="offer-card-img">
+            <img src="assets/images/business.png" alt="Corporate Rate">
+            <span class="offer-badge">Corporate</span>
+          </div>
+          <div class="offer-card-body">
+            <p class="offer-card-category">Business travel</p>
+            <h2 class="offer-card-name">Corporate Rate Programme</h2>
+            <p class="offer-card-desc">Tailored rates for companies with exclusive benefits, flexible booking terms and dedicated account management.</p>
+            <div class="offer-card-footer">
+              <p class="offer-expiry">Valid until: <strong>Ongoing</strong></p>
+              <a href="#" class="btn btn-outline-gold" style="padding:9px 18px;font-size:11px;">View offer</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Offer 6 -->
+        <div class="offer-card">
+          <div class="offer-card-img">
+            <img src="assets/images/travel.png" alt="Long Stay Deal">
+            <span class="offer-badge">Save 25%</span>
+          </div>
+          <div class="offer-card-body">
+            <p class="offer-card-category">Extended stay</p>
+            <h2 class="offer-card-name">Stay Longer, Save More</h2>
+            <p class="offer-card-desc">Save up to 25% on stays of 7 nights or more. Enjoy all the comforts of home with the service of a luxury hotel.</p>
+            <div class="offer-card-footer">
+              <p class="offer-expiry">Valid until: <strong>Ongoing</strong></p>
+              <a href="#" class="btn btn-outline-gold" style="padding:9px 18px;font-size:11px;">View offer</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Offer 7 -->
+        <div class="offer-card">
+          <div class="offer-card-img">
+            <img src="assets/images/hero.png" alt="Fraser World Members">
+            <span class="offer-badge">Members only</span>
+          </div>
+          <div class="offer-card-body">
+            <p class="offer-card-category">Fraser World</p>
+            <h2 class="offer-card-name">Fraser World Members Deal</h2>
+            <p class="offer-card-desc">Exclusive rates and bonus points for Fraser World members. Log in to unlock your personalised offers across our portfolio.</p>
+            <div class="offer-card-footer">
+              <p class="offer-expiry">Valid until: <strong>Ongoing</strong></p>
+              <a href="#" class="btn btn-outline-gold" style="padding:9px 18px;font-size:11px;">View offer</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Offer 8 -->
+        <div class="offer-card">
+          <div class="offer-card-img">
+            <img src="assets/images/room-modern.png" alt="Weekend Escape">
+          </div>
+          <div class="offer-card-body">
+            <p class="offer-card-category">Seasonal</p>
+            <h2 class="offer-card-name">Weekend Escape</h2>
+            <p class="offer-card-desc">Treat yourself to a luxury weekend break. Includes complimentary late checkout and a welcome drink on arrival.</p>
+            <div class="offer-card-footer">
+              <p class="offer-expiry">Valid until: <strong>31 Mar 2025</strong></p>
+              <a href="#" class="btn btn-outline-gold" style="padding:9px 18px;font-size:11px;">View offer</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Offer 9 -->
+        <div class="offer-card">
+          <div class="offer-card-img">
+            <img src="assets/images/suite.png" alt="Honeymoon Package">
+            <span class="offer-badge">Romance</span>
+          </div>
+          <div class="offer-card-body">
+            <p class="offer-card-category">Celebrating</p>
+            <h2 class="offer-card-name">Honeymoon &amp; Romance</h2>
+            <p class="offer-card-desc">Begin your journey together in style. Enjoy a suite upgrade, romantic turndown and a curated breakfast experience.</p>
+            <div class="offer-card-footer">
+              <p class="offer-expiry">Valid until: <strong>Ongoing</strong></p>
+              <a href="#" class="btn btn-outline-gold" style="padding:9px 18px;font-size:11px;">View offer</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Offer 10 -->
+        <div class="offer-card">
+          <div class="offer-card-img">
+            <img src="assets/images/lobby.png" alt="Bed and Breakfast">
+          </div>
+          <div class="offer-card-body">
+            <p class="offer-card-category">Sweet dreams</p>
+            <h2 class="offer-card-name">Bed &amp; Breakfast Delight</h2>
+            <p class="offer-card-desc">Start every morning right with a sumptuous buffet or in-suite breakfast, included in your room rate.</p>
+            <div class="offer-card-footer">
+              <p class="offer-expiry">Valid until: <strong>30 Sep 2025</strong></p>
+              <a href="#" class="btn btn-outline-gold" style="padding:9px 18px;font-size:11px;">View offer</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Offer 11 -->
+        <div class="offer-card">
+          <div class="offer-card-img">
+            <img src="assets/images/room-classic.png" alt="Spa Retreat">
+            <span class="offer-badge">Wellness</span>
+          </div>
+          <div class="offer-card-body">
+            <p class="offer-card-category">Seasonal</p>
+            <h2 class="offer-card-name">The Wellness Retreat</h2>
+            <p class="offer-card-desc">Rejuvenate mind and body with a dedicated spa credit, yoga sessions and healthy dining options.</p>
+            <div class="offer-card-footer">
+              <p class="offer-expiry">Valid until: <strong>31 Jul 2025</strong></p>
+              <a href="#" class="btn btn-outline-gold" style="padding:9px 18px;font-size:11px;">View offer</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Offer 12 -->
+        <div class="offer-card">
+          <div class="offer-card-img">
+            <img src="assets/images/business.png" alt="Work From Hotel">
+            <span class="offer-badge">Remote Work</span>
+          </div>
+          <div class="offer-card-body">
+            <p class="offer-card-category">Business travel</p>
+            <h2 class="offer-card-name">Work From Frasers</h2>
+            <p class="offer-card-desc">Productive days, luxurious evenings. Extended day-use rates with high-speed Wi-Fi and dedicated workspace.</p>
+            <div class="offer-card-footer">
+              <p class="offer-expiry">Valid until: <strong>Ongoing</strong></p>
+              <a href="#" class="btn btn-outline-gold" style="padding:9px 18px;font-size:11px;">View offer</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>For Guests</h4>
+        <ul>
+          <li><a href="#">Best Rate Guarantee</a></li>
+          <li><a href="#">Fraser World</a></li>
+          <li><a href="#">Long Stay</a></li>
+          <li><a href="#">Business Travel</a></li>
+          <li><a href="#">Fraser Cachet</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>For Corporate</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Business Development</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Brands</h4>
+        <ul>
+          <li><a href="#">Fraser Suites</a></li>
+          <li><a href="#">Fraser Residence</a></li>
+          <li><a href="#">Fraser Place</a></li>
+          <li><a href="#">Capri by Fraser</a></li>
+          <li><a href="#">Modena by Fraser</a></li>
+          <li><a href="#">Malmaison</a></li>
+          <li><a href="#">Hotel Du Vin &amp; Bistro</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy policy</a></li>
+          <li><a href="#">Cookie declaration</a></li>
+          <li><a href="#">Terms of use</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Sitemap</a></li>
+        </ul>
+      </div>
+      <div class="footer-brand-col">
+        <div class="footer-logo">Frasers <span>Hospitality</span></div>
+        <p class="footer-address">438 Alexandra Road, Alexandra Point Level 18, Singapore 119958</p>
+        <a class="footer-email" href="mailto:feedback@frashospitality.com">feedback@frashospitality.com</a>
+        <div class="footer-social">
+          <a href="#">f</a><a href="#">t</a><a href="#">y</a><a href="#">in</a><a href="#">ig</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Frasers Hospitality Pte Ltd. A member of Frasers Property Group.</span>
+      <div style="display:flex;gap:20px;">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>London City Guide — Frasers Hospitality</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── CITY HERO ── */
+    .city-hero {
+      position: relative;
+      height: 560px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .city-hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('assets/images/hero.png') center/cover no-repeat;
+    }
+    .city-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.2) 55%, transparent 100%);
+    }
+    .city-hero-content {
+      position: relative;
+      padding: 0 48px 48px;
+      width: 100%;
+    }
+    .city-hero-content .eyebrow { color: var(--gold); margin-bottom: 12px; }
+    .city-hero-content h1 { font-size: clamp(28px, 4.5vw, 52px); color: var(--white); margin-bottom: 12px; max-width: 640px; }
+    .city-hero-content p { font-size: 15px; color: rgba(255,255,255,0.75); max-width: 500px; line-height: 1.7; }
+    .city-hero-meta {
+      display: flex;
+      gap: 24px;
+      margin-top: 20px;
+      align-items: center;
+    }
+    .city-meta-chip {
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.85);
+      font-size: 11px;
+      letter-spacing: 1px;
+      padding: 6px 14px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    /* ── OUR PROPERTIES IN CITY ── */
+    .city-properties { padding: 72px 48px; background: var(--cream); }
+    .city-properties-inner { max-width: 1200px; margin: 0 auto; }
+    .city-props-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 40px;
+    }
+    .city-props-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+    /* ── ABOUT CITY ── */
+    .about-city { padding: 72px 48px; background: var(--white); }
+    .about-city-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .about-city-text .eyebrow { margin-bottom: 14px; }
+    .about-city-text h2 { font-size: 30px; margin-bottom: 20px; }
+    .about-city-text p { font-size: 14px; color: var(--gray); line-height: 1.8; margin-bottom: 14px; }
+    .city-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
+    .city-fact {
+      background: var(--cream);
+      padding: 18px;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    .city-fact-num { font-family: 'Georgia', serif; font-size: 28px; color: var(--gold); display: block; }
+    .city-fact-label { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--gray); }
+    .about-city-map {
+      height: 380px;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 14px;
+      color: var(--gray);
+    }
+    .about-city-map span { font-size: 48px; }
+    .about-city-map p { font-size: 13px; }
+
+    /* ── THINGS TO DO ── */
+    .things-section { padding: 72px 48px; background: var(--cream); }
+    .things-inner { max-width: 1200px; margin: 0 auto; }
+    .things-header { margin-bottom: 40px; }
+    .things-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .thing-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: box-shadow .3s, transform .3s;
+    }
+    .thing-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+    .thing-card-img { height: 180px; overflow: hidden; }
+    .thing-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; display: block; }
+    .thing-card:hover .thing-card-img img { transform: scale(1.05); }
+    .thing-card-body { padding: 18px; }
+    .thing-card-category { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .thing-card-name { font-size: 15px; margin-bottom: 6px; }
+    .thing-card-desc { font-size: 12px; color: var(--gray); line-height: 1.6; }
+    .thing-card-dist { font-size: 11px; color: var(--gold); margin-top: 10px; }
+
+    /* ── FRASER STUDIO BLOG ── */
+    .fraser-studio { padding: 72px 48px; background: var(--white); }
+    .fraser-studio-inner { max-width: 1200px; margin: 0 auto; }
+    .fraser-studio-header { margin-bottom: 40px; }
+    .blog-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 28px; }
+    .blog-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: box-shadow .3s;
+    }
+    .blog-card:hover { box-shadow: var(--shadow); }
+    .blog-card-img { height: 200px; overflow: hidden; }
+    .blog-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; display: block; }
+    .blog-card:hover .blog-card-img img { transform: scale(1.04); }
+    .blog-card-body { padding: 22px; }
+    .blog-card-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .blog-card-title { font-size: 17px; margin-bottom: 8px; line-height: 1.35; }
+    .blog-card-excerpt { font-size: 13px; color: var(--gray); line-height: 1.6; margin-bottom: 14px; }
+    .blog-card-meta { font-size: 11px; color: var(--gray); display: flex; align-items: center; gap: 8px; }
+    .blog-card-meta span { color: var(--border); }
+
+    /* ── FAQ ACCORDION ── */
+    .faq-section { padding: 72px 48px 80px; background: var(--cream); }
+    .faq-inner { max-width: 800px; margin: 0 auto; }
+    .faq-header { text-align: center; margin-bottom: 48px; }
+    .faq-list { display: flex; flex-direction: column; gap: 0; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      cursor: pointer;
+      font-family: 'Georgia', serif;
+      font-size: 16px;
+      color: var(--dark);
+      gap: 16px;
+    }
+    .faq-question:hover { color: var(--gold); }
+    .faq-question-icon {
+      width: 24px; height: 24px;
+      background: var(--gold-light);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      color: var(--gold);
+      flex-shrink: 0;
+      transition: background .2s;
+    }
+    .faq-question:hover .faq-question-icon { background: var(--gold); color: var(--white); }
+    .faq-answer {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.8;
+      padding-bottom: 20px;
+      max-width: 660px;
+    }
+    .faq-item.open .faq-answer { display: block; }
+    .faq-item:not(.open) .faq-answer { display: none; }
+    .faq-item.open .faq-question { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+  <!-- UTIL BAR -->
+  <div class="util-bar">
+    <div class="util-left">
+      <a href="#">EN</a>
+      <div class="util-divider"></div>
+      <a href="#">SGD</a>
+      <div class="util-divider"></div>
+      <a href="#">Frasers Hospitality</a>
+    </div>
+    <div class="util-right">
+      <a href="#">My reservations</a>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <span class="nav-hamburger">&#9776;</span>
+      <a href="index.html" class="nav-logo">
+        <span class="brand">Frasers</span>
+        <span class="sub">Hospitality</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="locations.html" class="active">Locations</a></li>
+        <li><a href="offers.html">Offers</a></li>
+        <li><a href="extended-stay.html">Extended Stay</a></li>
+        <li><a href="#">Business travel</a></li>
+        <li><a href="#">Our brands</a></li>
+        <li><a href="fraser-world.html">Fraser World</a></li>
+      </ul>
+      <div class="nav-actions">
+        <span class="nav-icon">&#128269;</span>
+        <span class="nav-icon">&#128100;</span>
+        <a href="#" class="btn-booknow">Book now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CITY HERO -->
+  <section class="city-hero">
+    <div class="city-hero-bg"></div>
+    <div class="city-hero-overlay"></div>
+    <div class="city-hero-content">
+      <p class="eyebrow">City guide</p>
+      <h1>Serviced apartments and hotels in London</h1>
+      <p>Discover the best of London from a Frasers Hospitality residence. Experience the city like a local with our curated guide to the capital.</p>
+      <div class="city-hero-meta">
+        <span class="city-meta-chip">&#127968; 4 Properties</span>
+        <span class="city-meta-chip">&#127759; United Kingdom</span>
+        <span class="city-meta-chip">&#128197; Best time: Apr–Sep</span>
+        <span class="city-meta-chip">&#128264; English</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR PROPERTIES -->
+  <section class="city-properties">
+    <div class="city-properties-inner">
+      <div class="city-props-header">
+        <div>
+          <p class="eyebrow">Our properties</p>
+          <h2 class="section-title">Where to stay in London</h2>
+        </div>
+        <a href="locations.html" class="btn btn-outline-dark">View all</a>
+      </div>
+      <div class="city-props-grid">
+        <div class="prop-card">
+          <div class="prop-card-img">
+            <img src="assets/images/hero.png" alt="Fraser Place Canary Wharf">
+          </div>
+          <div class="prop-card-body">
+            <p class="prop-card-tag">Fraser Place</p>
+            <h3 class="prop-card-name">Fraser Place Canary Wharf</h3>
+            <p class="prop-card-loc">&#127961; Canary Wharf, East London</p>
+            <div style="margin-top:14px;display:flex;justify-content:space-between;align-items:center;">
+              <div class="prop-card-price">From <strong>£240</strong>/night</div>
+              <a href="property.html" class="btn btn-outline-gold" style="padding:7px 14px;font-size:11px;">View</a>
+            </div>
+          </div>
+        </div>
+        <div class="prop-card">
+          <div class="prop-card-img">
+            <img src="assets/images/lobby.png" alt="Fraser Suites Kensington">
+          </div>
+          <div class="prop-card-body">
+            <p class="prop-card-tag">Fraser Suites</p>
+            <h3 class="prop-card-name">Fraser Suites Kensington</h3>
+            <p class="prop-card-loc">&#127961; Kensington, West London</p>
+            <div style="margin-top:14px;display:flex;justify-content:space-between;align-items:center;">
+              <div class="prop-card-price">From <strong>£310</strong>/night</div>
+              <a href="property.html" class="btn btn-outline-gold" style="padding:7px 14px;font-size:11px;">View</a>
+            </div>
+          </div>
+        </div>
+        <div class="prop-card">
+          <div class="prop-card-img">
+            <img src="assets/images/room-classic.png" alt="Malmaison London">
+          </div>
+          <div class="prop-card-body">
+            <p class="prop-card-tag">Malmaison</p>
+            <h3 class="prop-card-name">Malmaison London</h3>
+            <p class="prop-card-loc">&#127961; Clerkenwell, Central London</p>
+            <div style="margin-top:14px;display:flex;justify-content:space-between;align-items:center;">
+              <div class="prop-card-price">From <strong>£189</strong>/night</div>
+              <a href="property.html" class="btn btn-outline-gold" style="padding:7px 14px;font-size:11px;">View</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT LONDON -->
+  <section class="about-city">
+    <div class="about-city-inner">
+      <div class="about-city-text">
+        <p class="eyebrow">Discover the city</p>
+        <h2>About London</h2>
+        <p>London is one of the world's great cities — a vibrant, ever-evolving metropolis that weaves centuries of history through a dynamic modern landscape. From the majestic sweep of the Thames to the storied lanes of the East End, London rewards the curious and the discerning in equal measure.</p>
+        <p>Whether you're in the capital for business or pleasure, the city's world-class museums, iconic landmarks, acclaimed restaurants and extraordinary cultural scene make every day an adventure. Our London properties put you right at the heart of it all.</p>
+        <div class="city-facts">
+          <div class="city-fact">
+            <span class="city-fact-num">9M+</span>
+            <span class="city-fact-label">Population</span>
+          </div>
+          <div class="city-fact">
+            <span class="city-fact-num">250+</span>
+            <span class="city-fact-label">Nationalities</span>
+          </div>
+          <div class="city-fact">
+            <span class="city-fact-num">170+</span>
+            <span class="city-fact-label">Museums &amp; galleries</span>
+          </div>
+          <div class="city-fact">
+            <span class="city-fact-num">67</span>
+            <span class="city-fact-label">Michelin-starred restaurants</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-city-map">
+        <span>&#128506;</span>
+        <p>London — Interactive Map</p>
+        <a href="#" class="btn btn-outline-dark" style="font-size:12px;padding:9px 20px;">Explore on map</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- THINGS TO DO -->
+  <section class="things-section">
+    <div class="things-inner">
+      <div class="things-header">
+        <p class="eyebrow">City experiences</p>
+        <h2 class="section-title">Things to do in London</h2>
+      </div>
+      <div class="things-grid">
+        <div class="thing-card">
+          <div class="thing-card-img">
+            <img src="assets/images/travel.png" alt="Museum Quarter">
+          </div>
+          <div class="thing-card-body">
+            <p class="thing-card-category">Culture</p>
+            <h3 class="thing-card-name">Museum Quarter, South Kensington</h3>
+            <p class="thing-card-desc">The Victoria &amp; Albert Museum, Natural History Museum and Science Museum sit within a 10-minute walk of each other.</p>
+            <p class="thing-card-dist">&#127961; 3.2 km from Fraser Place CW</p>
+          </div>
+        </div>
+        <div class="thing-card">
+          <div class="thing-card-img">
+            <img src="assets/images/business.png" alt="Borough Market">
+          </div>
+          <div class="thing-card-body">
+            <p class="thing-card-category">Food &amp; Drink</p>
+            <h3 class="thing-card-name">Borough Market</h3>
+            <p class="thing-card-desc">London's most celebrated food market, buzzing with artisan producers, street food and world-class ingredients.</p>
+            <p class="thing-card-dist">&#127961; 4.1 km from Fraser Place CW</p>
+          </div>
+        </div>
+        <div class="thing-card">
+          <div class="thing-card-img">
+            <img src="assets/images/lobby.png" alt="Tate Modern">
+          </div>
+          <div class="thing-card-body">
+            <p class="thing-card-category">Art &amp; Design</p>
+            <h3 class="thing-card-name">Tate Modern</h3>
+            <p class="thing-card-desc">Housed in a former power station on the Thames, Tate Modern is the world's most visited modern art gallery.</p>
+            <p class="thing-card-dist">&#127961; 3.8 km from Fraser Place CW</p>
+          </div>
+        </div>
+        <div class="thing-card">
+          <div class="thing-card-img">
+            <img src="assets/images/family.png" alt="Hyde Park">
+          </div>
+          <div class="thing-card-body">
+            <p class="thing-card-category">Nature</p>
+            <h3 class="thing-card-name">Hyde Park &amp; Kensington Gardens</h3>
+            <p class="thing-card-desc">Over 400 acres of parkland in the heart of London — perfect for morning runs, picnics and the famous Serpentine.</p>
+            <p class="thing-card-dist">&#127961; 0.8 km from Fraser Suites Kensington</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FRASER STUDIO -->
+  <section class="fraser-studio">
+    <div class="fraser-studio-inner">
+      <div class="fraser-studio-header">
+        <p class="eyebrow">Fraser Studio</p>
+        <h2 class="section-title">From our Fraser Studio</h2>
+        <p class="section-sub">Insider perspectives on London — from our team and guests who know the city best.</p>
+      </div>
+      <div class="blog-grid">
+        <div class="blog-card">
+          <div class="blog-card-img">
+            <img src="assets/images/travel.png" alt="London in 48 hours">
+          </div>
+          <div class="blog-card-body">
+            <p class="blog-card-tag">City Guide</p>
+            <h3 class="blog-card-title">London in 48 Hours: The Perfect Short Break Itinerary</h3>
+            <p class="blog-card-excerpt">From a dawn walk along the Thames to a late-night cocktail in Shoreditch — make the most of every moment.</p>
+            <div class="blog-card-meta">15 Jan 2025 <span>&#9679;</span> 5 min read</div>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-card-img">
+            <img src="assets/images/business.png" alt="London for business">
+          </div>
+          <div class="blog-card-body">
+            <p class="blog-card-tag">Business Travel</p>
+            <h3 class="blog-card-title">The Business Traveller's Guide to London's Financial Districts</h3>
+            <p class="blog-card-excerpt">Canary Wharf, the City of London and beyond — where to stay and how to get around when every minute counts.</p>
+            <div class="blog-card-meta">22 Feb 2025 <span>&#9679;</span> 7 min read</div>
+          </div>
+        </div>
+        <div class="blog-card">
+          <div class="blog-card-img">
+            <img src="assets/images/family.png" alt="London with family">
+          </div>
+          <div class="blog-card-body">
+            <p class="blog-card-tag">Family</p>
+            <h3 class="blog-card-title">London with Kids: A Family Guide to the Capital's Best Attractions</h3>
+            <p class="blog-card-excerpt">From the Science Museum to Harry Potter's King's Cross — London is endlessly magical for young adventurers.</p>
+            <div class="blog-card-meta">8 Mar 2025 <span>&#9679;</span> 6 min read</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ ACCORDION -->
+  <section class="faq-section">
+    <div class="faq-inner">
+      <div class="faq-header">
+        <p class="eyebrow">Frequently asked questions</p>
+        <h2 class="section-title">Everything you need to know</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item open">
+          <div class="faq-question">
+            What's the best area to stay in London?
+            <div class="faq-question-icon">&#8722;</div>
+          </div>
+          <div class="faq-answer">
+            It depends on your priorities. Canary Wharf is ideal for business travellers — well-connected, modern and efficient. Kensington offers a calmer, more residential feel with proximity to museums and parks. Clerkenwell is perfect for those who want to be close to the creative heart of the city.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            How do I get from Heathrow Airport to my property?
+            <div class="faq-question-icon">&#43;</div>
+          </div>
+          <div class="faq-answer">
+            The fastest option from Heathrow is the Elizabeth Line (30–40 minutes to central London). Taxis take approximately 45–60 minutes depending on traffic. Our concierge team can arrange a private transfer for you in advance.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            Can I park at your London properties?
+            <div class="faq-question-icon">&#43;</div>
+          </div>
+          <div class="faq-answer">
+            Parking availability varies by property. Fraser Place Canary Wharf has limited on-site parking available at an additional charge. We recommend contacting the property directly or using one of the nearby public car parks.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            Is public transport easy to use in London?
+            <div class="faq-question-icon">&#43;</div>
+          </div>
+          <div class="faq-answer">
+            London has one of the world's best public transport networks. The Underground (the Tube), Overground, Elizabeth line and extensive bus network make it easy to reach virtually any part of the city. We recommend getting an Oyster card or simply using a contactless card for all journeys.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            What is the cancellation policy?
+            <div class="faq-question-icon">&#43;</div>
+          </div>
+          <div class="faq-answer">
+            Our flexible rate bookings can typically be cancelled up to 24–48 hours before arrival without charge. Advance purchase rates are non-refundable. Exact policies vary by property and rate type — please review the booking conditions when reserving.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            Are pets allowed at your London properties?
+            <div class="faq-question-icon">&#43;</div>
+          </div>
+          <div class="faq-answer">
+            Pet policies vary by property. Some of our London residences do welcome well-behaved dogs with advance notice and a small additional charge. Please contact the property directly to confirm pet-friendly availability before booking.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>For Guests</h4>
+        <ul>
+          <li><a href="#">Best Rate Guarantee</a></li>
+          <li><a href="#">Fraser World</a></li>
+          <li><a href="#">Long Stay</a></li>
+          <li><a href="#">Business Travel</a></li>
+          <li><a href="#">Fraser Cachet</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>For Corporate</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Business Development</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Brands</h4>
+        <ul>
+          <li><a href="#">Fraser Suites</a></li>
+          <li><a href="#">Fraser Residence</a></li>
+          <li><a href="#">Fraser Place</a></li>
+          <li><a href="#">Capri by Fraser</a></li>
+          <li><a href="#">Modena by Fraser</a></li>
+          <li><a href="#">Malmaison</a></li>
+          <li><a href="#">Hotel Du Vin &amp; Bistro</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy policy</a></li>
+          <li><a href="#">Cookie declaration</a></li>
+          <li><a href="#">Terms of use</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Sitemap</a></li>
+        </ul>
+      </div>
+      <div class="footer-brand-col">
+        <div class="footer-logo">Frasers <span>Hospitality</span></div>
+        <p class="footer-address">438 Alexandra Road, Alexandra Point Level 18, Singapore 119958</p>
+        <a class="footer-email" href="mailto:feedback@frashospitality.com">feedback@frashospitality.com</a>
+        <div class="footer-social">
+          <a href="#">f</a><a href="#">t</a><a href="#">y</a><a href="#">in</a><a href="#">ig</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Frasers Hospitality Pte Ltd. A member of Frasers Property Group.</span>
+      <div style="display:flex;gap:20px;">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Simple FAQ accordion toggle
+    document.querySelectorAll('.faq-question').forEach(function(q) {
+      q.addEventListener('click', function() {
+        var item = this.closest('.faq-item');
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(function(i) {
+          i.classList.remove('open');
+          i.querySelector('.faq-question-icon').textContent = '+';
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          item.querySelector('.faq-question-icon').textContent = '−';
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

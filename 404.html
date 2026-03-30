@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found — Frasers Hospitality</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── 404 HERO ── */
+    .err-hero {
+      position: relative;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .err-hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('assets/images/lobby.png') center/cover no-repeat;
+    }
+    .err-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(28,28,28,0.72);
+    }
+    .err-hero-content {
+      position: relative;
+      text-align: center;
+      max-width: 680px;
+      padding: 0 32px;
+    }
+    .err-code {
+      font-family: 'Georgia', serif;
+      font-size: 120px;
+      color: rgba(255,255,255,0.08);
+      line-height: 1;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      letter-spacing: 12px;
+      pointer-events: none;
+      user-select: none;
+    }
+    .err-eyebrow {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .err-heading {
+      font-size: clamp(26px, 4vw, 46px);
+      color: var(--white);
+      margin-bottom: 18px;
+      font-style: italic;
+      line-height: 1.2;
+    }
+    .err-subtext {
+      font-size: 15px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+    .err-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── YOU MIGHT LIKE ── */
+    .err-suggestions { padding: 80px 48px; background: var(--cream); }
+    .err-suggestions-inner { max-width: 1200px; margin: 0 auto; }
+    .err-suggestions-header { text-align: center; margin-bottom: 48px; }
+    .err-suggestions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .sugg-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: box-shadow .3s, transform .3s;
+      display: flex;
+      flex-direction: column;
+    }
+    .sugg-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .sugg-card-img { height: 220px; overflow: hidden; position: relative; }
+    .sugg-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; display: block; }
+    .sugg-card:hover .sugg-card-img img { transform: scale(1.05); }
+    .sugg-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 60%);
+    }
+    .sugg-card-img-title {
+      position: absolute;
+      bottom: 16px;
+      left: 20px;
+      font-family: 'Georgia', serif;
+      font-size: 18px;
+      color: var(--white);
+    }
+    .sugg-card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+    .sugg-card-body p { font-size: 13px; color: var(--gray); line-height: 1.7; flex: 1; margin-bottom: 20px; }
+    .sugg-card-body a { align-self: flex-start; }
+
+    /* ── BACK TO TOP / NAV STRIP ── */
+    .err-nav-strip {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 48px;
+    }
+    .err-nav-strip-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .err-nav-strip-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray);
+      flex-shrink: 0;
+    }
+    .err-quick-links {
+      display: flex;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+    .err-quick-link {
+      font-size: 12px;
+      color: var(--dark);
+      padding: 8px 18px;
+      border-left: 1px solid var(--border);
+      transition: color .2s;
+    }
+    .err-quick-link:first-child { border-left: none; }
+    .err-quick-link:hover { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+  <!-- UTIL BAR -->
+  <div class="util-bar">
+    <div class="util-left">
+      <a href="#">EN</a>
+      <div class="util-divider"></div>
+      <a href="#">SGD</a>
+      <div class="util-divider"></div>
+      <a href="#">Frasers Hospitality</a>
+    </div>
+    <div class="util-right">
+      <a href="#">My reservations</a>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <span class="nav-hamburger">&#9776;</span>
+      <a href="index.html" class="nav-logo">
+        <span class="brand">Frasers</span>
+        <span class="sub">Hospitality</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="locations.html">Locations</a></li>
+        <li><a href="offers.html">Offers</a></li>
+        <li><a href="extended-stay.html">Extended Stay</a></li>
+        <li><a href="#">Business travel</a></li>
+        <li><a href="#">Our brands</a></li>
+        <li><a href="fraser-world.html">Fraser World</a></li>
+      </ul>
+      <div class="nav-actions">
+        <span class="nav-icon">&#128269;</span>
+        <span class="nav-icon">&#128100;</span>
+        <a href="#" class="btn-booknow">Book now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 404 HERO -->
+  <section class="err-hero">
+    <div class="err-hero-bg"></div>
+    <div class="err-hero-overlay"></div>
+    <span class="err-code">404</span>
+    <div class="err-hero-content">
+      <p class="err-eyebrow">Error 404 &mdash; Page not found</p>
+      <h1 class="err-heading">Oops! We couldn't find that page.</h1>
+      <p class="err-subtext">It seems the page you're looking for has moved, been removed or never existed. Don't worry — let us help you find what you're looking for.</p>
+      <div class="err-buttons">
+        <a href="index.html" class="btn btn-gold" style="padding:14px 32px;">Return home</a>
+        <a href="#" class="btn btn-outline-white" style="padding:14px 32px;">Contact us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUICK NAV STRIP -->
+  <div class="err-nav-strip">
+    <div class="err-nav-strip-inner">
+      <span class="err-nav-strip-label">Quick links</span>
+      <div class="err-quick-links">
+        <a href="locations.html" class="err-quick-link">Find a property</a>
+        <a href="offers.html" class="err-quick-link">Latest offers</a>
+        <a href="extended-stay.html" class="err-quick-link">Extended stay</a>
+        <a href="fraser-world.html" class="err-quick-link">Fraser World</a>
+        <a href="#" class="err-quick-link">Business travel</a>
+        <a href="#" class="err-quick-link">Contact us</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- YOU MIGHT LIKE -->
+  <section class="err-suggestions">
+    <div class="err-suggestions-inner">
+      <div class="err-suggestions-header">
+        <p class="eyebrow">You might like to&hellip;</p>
+        <h2 class="section-title">Explore Frasers Hospitality</h2>
+        <p class="section-sub" style="margin:12px auto 0;text-align:center;">While we sort this out, here are some of the best places to start your Frasers journey.</p>
+      </div>
+      <div class="err-suggestions-grid">
+
+        <!-- Card 1 -->
+        <div class="sugg-card">
+          <div class="sugg-card-img">
+            <img src="assets/images/lobby.png" alt="Browse our properties">
+            <div class="sugg-card-overlay"></div>
+            <span class="sugg-card-img-title">Browse our properties</span>
+          </div>
+          <div class="sugg-card-body">
+            <p>Discover 140+ award-winning serviced apartments and hotel residences across 80+ cities worldwide. From Singapore to London, Dubai to Glasgow — find your perfect stay.</p>
+            <a href="locations.html" class="btn btn-gold" style="padding:10px 24px;font-size:12px;">Find a property</a>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="sugg-card">
+          <div class="sugg-card-img">
+            <img src="assets/images/room-modern.png" alt="Explore our offers">
+            <div class="sugg-card-overlay"></div>
+            <span class="sugg-card-img-title">Explore our offers</span>
+          </div>
+          <div class="sugg-card-body">
+            <p>Unlock exclusive deals when you book direct. From early-bird savings to seasonal packages, our handpicked offers make every stay more rewarding.</p>
+            <a href="offers.html" class="btn btn-gold" style="padding:10px 24px;font-size:12px;">See all offers</a>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="sugg-card">
+          <div class="sugg-card-img">
+            <img src="assets/images/suite.png" alt="Join our loyalty programme">
+            <div class="sugg-card-overlay"></div>
+            <span class="sugg-card-img-title">Join our loyalty programme</span>
+          </div>
+          <div class="sugg-card-body">
+            <p>Become a Fraser World member — it's free. Earn points on every stay, unlock exclusive rates and enjoy elevated privileges across our entire global portfolio.</p>
+            <a href="fraser-world.html" class="btn btn-gold" style="padding:10px 24px;font-size:12px;">Join Fraser World</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>For Guests</h4>
+        <ul>
+          <li><a href="#">Best Rate Guarantee</a></li>
+          <li><a href="#">Fraser World</a></li>
+          <li><a href="#">Long Stay</a></li>
+          <li><a href="#">Business Travel</a></li>
+          <li><a href="#">Fraser Cachet</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>For Corporate</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Business Development</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Brands</h4>
+        <ul>
+          <li><a href="#">Fraser Suites</a></li>
+          <li><a href="#">Fraser Residence</a></li>
+          <li><a href="#">Fraser Place</a></li>
+          <li><a href="#">Capri by Fraser</a></li>
+          <li><a href="#">Modena by Fraser</a></li>
+          <li><a href="#">Malmaison</a></li>
+          <li><a href="#">Hotel Du Vin &amp; Bistro</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy policy</a></li>
+          <li><a href="#">Cookie declaration</a></li>
+          <li><a href="#">Terms of use</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Sitemap</a></li>
+        </ul>
+      </div>
+      <div class="footer-brand-col">
+        <div class="footer-logo">Frasers <span>Hospitality</span></div>
+        <p class="footer-address">438 Alexandra Road, Alexandra Point Level 18, Singapore 119958</p>
+        <a class="footer-email" href="mailto:feedback@frashospitality.com">feedback@frashospitality.com</a>
+        <div class="footer-social">
+          <a href="#">f</a><a href="#">t</a><a href="#">y</a><a href="#">in</a><a href="#">ig</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Frasers Hospitality Pte Ltd. A member of Frasers Property Group.</span>
+      <div style="display:flex;gap:20px;">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

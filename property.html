@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fraser Suites Glasgow — Frasers Hospitality</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── PROPERTY HERO ── */
+    .prop-hero {
+      position: relative;
+      height: 560px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+    .prop-hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('assets/images/room-classic.png') center/cover no-repeat;
+    }
+    .prop-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.15) 60%, transparent 100%);
+    }
+    .prop-hero-content {
+      position: relative;
+      padding: 0 48px 40px;
+      width: 100%;
+    }
+    .prop-hero-brand {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .prop-hero-name {
+      font-size: clamp(28px, 4vw, 48px);
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .prop-hero-meta {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .prop-hero-loc { font-size: 13px; color: rgba(255,255,255,0.75); }
+    .prop-hero-stars { color: var(--gold); font-size: 14px; }
+    .prop-hero-award {
+      font-size: 10px;
+      letter-spacing: 1px;
+      background: var(--gold);
+      color: var(--white);
+      padding: 4px 10px;
+    }
+
+    /* ── TAB NAV ── */
+    .prop-tabs {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 64px;
+      z-index: 100;
+    }
+    .prop-tabs-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .prop-tab-links { display: flex; gap: 0; }
+    .prop-tab {
+      padding: 18px 24px;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      color: var(--gray);
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: color .2s, border-color .2s;
+      text-decoration: none;
+    }
+    .prop-tab:hover { color: var(--dark); }
+    .prop-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .prop-book-bar { display: flex; gap: 16px; align-items: center; }
+    .prop-price-display { font-size: 12px; color: var(--gray); }
+    .prop-price-display strong { font-family: 'Georgia', serif; font-size: 22px; color: var(--dark); }
+
+    /* ── HIGHLIGHTS ── */
+    .highlights-section { padding: 56px 48px; background: var(--cream); }
+    .highlights-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 56px;
+    }
+    .highlights-text .eyebrow { margin-bottom: 12px; }
+    .highlights-text h2 { font-size: 30px; margin-bottom: 16px; }
+    .highlights-text p { font-size: 14px; color: var(--gray); line-height: 1.8; margin-bottom: 14px; }
+    .highlights-badges { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .highlight-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--dark);
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+    }
+    .highlight-badge span { color: var(--gold); font-size: 14px; }
+    .highlights-sidebar {}
+    .prop-quick-book {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 28px;
+      position: sticky;
+      top: 120px;
+    }
+    .prop-quick-book h3 { font-size: 18px; margin-bottom: 4px; }
+    .prop-quick-book .price-from { font-size: 13px; color: var(--gray); margin-bottom: 20px; }
+    .prop-quick-book .price-from strong { font-family: 'Georgia', serif; font-size: 28px; color: var(--dark); }
+    .pqb-field {
+      margin-bottom: 14px;
+    }
+    .pqb-field label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); display: block; margin-bottom: 6px; }
+    .pqb-field input, .pqb-field select {
+      width: 100%;
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      font-size: 13px;
+      color: var(--dark);
+      outline: none;
+      background: var(--white);
+    }
+    .pqb-dates { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .pqb-btn { width: 100%; margin-top: 6px; }
+
+    /* ── ROOMS SECTION ── */
+    .rooms-section { padding: 72px 48px; background: var(--white); }
+    .rooms-inner { max-width: 1200px; margin: 0 auto; }
+    .rooms-header { margin-bottom: 40px; }
+    .rooms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .room-card {
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: box-shadow .3s;
+    }
+    .room-card:hover { box-shadow: var(--shadow-lg); }
+    .room-card-img { height: 200px; overflow: hidden; }
+    .room-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; display: block; }
+    .room-card:hover .room-card-img img { transform: scale(1.05); }
+    .room-card-body { padding: 22px; }
+    .room-card-type { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .room-card-name { font-size: 18px; margin-bottom: 8px; }
+    .room-card-specs {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .room-spec { font-size: 11px; color: var(--gray); display: flex; align-items: center; gap: 5px; }
+    .room-card-price { font-size: 12px; color: var(--gray); padding-top: 12px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .room-card-price strong { font-family: 'Georgia', serif; font-size: 20px; color: var(--dark); }
+
+    /* ── FACILITIES ── */
+    .facilities-section { padding: 72px 48px; background: var(--cream); }
+    .facilities-inner { max-width: 1200px; margin: 0 auto; }
+    .facilities-header { margin-bottom: 40px; }
+    .facilities-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .facility-group h4 {
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-bottom: 16px;
+      font-family: 'Arial', sans-serif;
+      font-weight: 700;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .facility-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .facility-list li { font-size: 13px; color: var(--gray); display: flex; align-items: center; gap: 8px; }
+    .facility-list li::before { content: '✓'; color: var(--gold); font-size: 11px; flex-shrink: 0; }
+
+    /* ── LOCATION ── */
+    .location-section { padding: 72px 48px; background: var(--white); }
+    .location-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .location-map-placeholder {
+      height: 340px;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 14px;
+      color: var(--gray);
+    }
+    .location-map-placeholder span { font-size: 40px; }
+    .location-map-placeholder p { font-size: 13px; }
+    .location-text {}
+    .location-text .eyebrow { margin-bottom: 12px; }
+    .location-text h2 { font-size: 28px; margin-bottom: 16px; }
+    .location-text p { font-size: 14px; color: var(--gray); line-height: 1.8; margin-bottom: 16px; }
+    .nearby-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+    .nearby-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--dark);
+    }
+    .nearby-dot {
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .nearby-dist { margin-left: auto; font-size: 11px; color: var(--gray); }
+
+    /* ── COLLECTION ── */
+    .collection-section { padding: 72px 48px; background: var(--cream); }
+    .collection-inner { max-width: 1200px; margin: 0 auto; }
+    .collection-header { margin-bottom: 40px; }
+    .collection-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  </style>
+</head>
+<body>
+
+  <!-- UTIL BAR -->
+  <div class="util-bar">
+    <div class="util-left">
+      <a href="#">EN</a>
+      <div class="util-divider"></div>
+      <a href="#">SGD</a>
+      <div class="util-divider"></div>
+      <a href="#">Frasers Hospitality</a>
+    </div>
+    <div class="util-right">
+      <a href="#">My reservations</a>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <span class="nav-hamburger">&#9776;</span>
+      <a href="index.html" class="nav-logo">
+        <span class="brand">Frasers</span>
+        <span class="sub">Hospitality</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="locations.html" class="active">Locations</a></li>
+        <li><a href="offers.html">Offers</a></li>
+        <li><a href="extended-stay.html">Extended Stay</a></li>
+        <li><a href="#">Business travel</a></li>
+        <li><a href="#">Our brands</a></li>
+        <li><a href="fraser-world.html">Fraser World</a></li>
+      </ul>
+      <div class="nav-actions">
+        <span class="nav-icon">&#128269;</span>
+        <span class="nav-icon">&#128100;</span>
+        <a href="#" class="btn-booknow">Book now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PROPERTY HERO -->
+  <section class="prop-hero">
+    <div class="prop-hero-bg"></div>
+    <div class="prop-hero-overlay"></div>
+    <div class="prop-hero-content">
+      <p class="prop-hero-brand">Fraser Suites &bull; Serviced Residence</p>
+      <h1 class="prop-hero-name">Fraser Suites Glasgow</h1>
+      <div class="prop-hero-meta">
+        <span class="prop-hero-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span class="prop-hero-loc">&#127961; 1–19 Albion Street, Glasgow G1 1LH, United Kingdom</span>
+        <span class="prop-hero-award">Award-winning</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB NAV -->
+  <div class="prop-tabs">
+    <div class="prop-tabs-inner">
+      <div class="prop-tab-links">
+        <a href="#overview" class="prop-tab active">Overview</a>
+        <a href="#rooms" class="prop-tab">Rooms</a>
+        <a href="#facilities" class="prop-tab">Facilities</a>
+        <a href="#location" class="prop-tab">Location</a>
+        <a href="#gallery" class="prop-tab">Gallery</a>
+      </div>
+      <div class="prop-book-bar">
+        <div class="prop-price-display">From <strong>£195</strong>/night</div>
+        <a href="#" class="btn btn-gold" style="padding:10px 22px;">Book now</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HIGHLIGHTS + QUICK BOOK -->
+  <section class="highlights-section" id="overview">
+    <div class="highlights-inner">
+      <div class="highlights-text">
+        <p class="eyebrow">About this property</p>
+        <h2>A refined residence in the heart of Glasgow</h2>
+        <p>Fraser Suites Glasgow occupies a stunning conversion of a Grade A listed Victorian warehouse in the historic Merchant City district. Beautifully blending original architectural features with contemporary interiors, the property offers 99 studio and one-bedroom apartments perfectly suited to both short breaks and extended stays.</p>
+        <p>Each apartment features a fully equipped kitchen, separate living area, high-speed Wi-Fi and satellite television. Guests enjoy access to the state-of-the-art fitness centre and complimentary 24-hour concierge service.</p>
+        <div class="highlights-badges">
+          <span class="highlight-badge"><span>&#127775;</span> 5-Star Rating</span>
+          <span class="highlight-badge"><span>&#127942;</span> Best Serviced Apartment 2024</span>
+          <span class="highlight-badge"><span>&#127758;</span> 80+ Global Properties</span>
+          <span class="highlight-badge"><span>&#128179;</span> Best Rate Guarantee</span>
+          <span class="highlight-badge"><span>&#128506;</span> 24hr Concierge</span>
+          <span class="highlight-badge"><span>&#127947;</span> Fitness Centre</span>
+        </div>
+      </div>
+      <div class="highlights-sidebar">
+        <div class="prop-quick-book">
+          <h3>Check availability</h3>
+          <p class="price-from">From <strong>£195</strong> / night</p>
+          <div class="pqb-dates">
+            <div class="pqb-field">
+              <label>Check-in</label>
+              <input type="date">
+            </div>
+            <div class="pqb-field">
+              <label>Check-out</label>
+              <input type="date">
+            </div>
+          </div>
+          <div class="pqb-field">
+            <label>Guests</label>
+            <select>
+              <option>1 Guest</option>
+              <option>2 Guests</option>
+              <option>3 Guests</option>
+            </select>
+          </div>
+          <div class="pqb-field">
+            <label>Room type</label>
+            <select>
+              <option>Any room type</option>
+              <option>Studio Classic</option>
+              <option>Studio Deluxe</option>
+              <option>One Bedroom Apartment</option>
+            </select>
+          </div>
+          <a href="#" class="btn btn-gold pqb-btn">Check availability</a>
+          <p style="font-size:11px;color:var(--gray);text-align:center;margin-top:12px;">Best rate guaranteed when you book direct</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROOMS -->
+  <section class="rooms-section" id="rooms">
+    <div class="rooms-inner">
+      <div class="rooms-header">
+        <p class="eyebrow">Accommodation</p>
+        <h2 class="section-title">Our room types</h2>
+      </div>
+      <div class="rooms-grid">
+        <div class="room-card">
+          <div class="room-card-img">
+            <img src="assets/images/room-classic.png" alt="Studio Classic">
+          </div>
+          <div class="room-card-body">
+            <p class="room-card-type">Studio</p>
+            <h3 class="room-card-name">Studio Classic</h3>
+            <div class="room-card-specs">
+              <span class="room-spec">&#128716; 28 m²</span>
+              <span class="room-spec">&#128716; King bed</span>
+              <span class="room-spec">&#127859; Kitchenette</span>
+              <span class="room-spec">&#128187; Wi-Fi</span>
+            </div>
+            <div class="room-card-price">
+              <span>From <strong>£195</strong>/night</span>
+              <a href="room-detail.html" class="btn btn-outline-gold" style="padding:7px 14px;font-size:11px;">View</a>
+            </div>
+          </div>
+        </div>
+        <div class="room-card">
+          <div class="room-card-img">
+            <img src="assets/images/suite.png" alt="Studio Deluxe">
+          </div>
+          <div class="room-card-body">
+            <p class="room-card-type">Studio</p>
+            <h3 class="room-card-name">Studio Deluxe</h3>
+            <div class="room-card-specs">
+              <span class="room-spec">&#128716; 36 m²</span>
+              <span class="room-spec">&#128716; King bed</span>
+              <span class="room-spec">&#127859; Full kitchen</span>
+              <span class="room-spec">&#128187; Wi-Fi</span>
+            </div>
+            <div class="room-card-price">
+              <span>From <strong>£225</strong>/night</span>
+              <a href="room-detail.html" class="btn btn-outline-gold" style="padding:7px 14px;font-size:11px;">View</a>
+            </div>
+          </div>
+        </div>
+        <div class="room-card">
+          <div class="room-card-img">
+            <img src="assets/images/hero.png" alt="One Bedroom Apartment">
+          </div>
+          <div class="room-card-body">
+            <p class="room-card-type">One Bedroom</p>
+            <h3 class="room-card-name">One Bedroom Apartment</h3>
+            <div class="room-card-specs">
+              <span class="room-spec">&#128716; 52 m²</span>
+              <span class="room-spec">&#128716; King bed</span>
+              <span class="room-spec">&#127859; Full kitchen</span>
+              <span class="room-spec">&#127968; Living room</span>
+            </div>
+            <div class="room-card-price">
+              <span>From <strong>£295</strong>/night</span>
+              <a href="room-detail.html" class="btn btn-outline-gold" style="padding:7px 14px;font-size:11px;">View</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FACILITIES -->
+  <section class="facilities-section" id="facilities">
+    <div class="facilities-inner">
+      <div class="facilities-header">
+        <p class="eyebrow">Amenities</p>
+        <h2 class="section-title">Facilities at Fraser Suites Glasgow</h2>
+      </div>
+      <div class="facilities-grid">
+        <div class="facility-group">
+          <h4>Recreation</h4>
+          <ul class="facility-list">
+            <li>Fitness centre</li>
+            <li>Sauna</li>
+            <li>Bicycle hire</li>
+            <li>Outdoor terrace</li>
+          </ul>
+        </div>
+        <div class="facility-group">
+          <h4>Services</h4>
+          <ul class="facility-list">
+            <li>24-hour concierge</li>
+            <li>Room service</li>
+            <li>Weekly housekeeping</li>
+            <li>Dry cleaning &amp; laundry</li>
+            <li>In-room grocery delivery</li>
+          </ul>
+        </div>
+        <div class="facility-group">
+          <h4>Business</h4>
+          <ul class="facility-list">
+            <li>Business centre</li>
+            <li>Meeting rooms</li>
+            <li>High-speed Wi-Fi (complimentary)</li>
+            <li>Printing &amp; copying</li>
+          </ul>
+        </div>
+        <div class="facility-group">
+          <h4>In-apartment</h4>
+          <ul class="facility-list">
+            <li>Fully equipped kitchen</li>
+            <li>Washer-dryer</li>
+            <li>Flat-screen TV</li>
+            <li>Safe</li>
+            <li>Air conditioning</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section class="location-section" id="location">
+    <div class="location-inner">
+      <div class="location-map-placeholder">
+        <span>&#128506;</span>
+        <p>Map placeholder — 1–19 Albion Street, Glasgow</p>
+        <a href="#" class="btn btn-outline-dark" style="font-size:12px;padding:9px 20px;">Get directions</a>
+      </div>
+      <div class="location-text">
+        <p class="eyebrow">Getting here</p>
+        <h2>Perfectly placed in Merchant City</h2>
+        <p>Fraser Suites Glasgow sits in the vibrant Merchant City district, just moments from the best restaurants, bars and cultural attractions Glasgow has to offer. Glasgow Central Station is a 10-minute walk away.</p>
+        <ul class="nearby-list">
+          <li><span class="nearby-dot"></span> Glasgow Central Station <span class="nearby-dist">0.7 km &bull; 10 min walk</span></li>
+          <li><span class="nearby-dot"></span> Glasgow City Centre Shopping <span class="nearby-dist">0.5 km &bull; 7 min walk</span></li>
+          <li><span class="nearby-dot"></span> Glasgow Airport <span class="nearby-dist">12 km &bull; 25 min drive</span></li>
+          <li><span class="nearby-dot"></span> University of Glasgow <span class="nearby-dist">3 km &bull; 10 min taxi</span></li>
+          <li><span class="nearby-dot"></span> Scottish Event Campus (SEC) <span class="nearby-dist">2.5 km &bull; 8 min taxi</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLECTION -->
+  <section class="collection-section" id="gallery">
+    <div class="collection-inner">
+      <div class="collection-header">
+        <p class="eyebrow">You may also like</p>
+        <h2 class="section-title">Our collection</h2>
+      </div>
+      <div class="collection-grid">
+        <div class="prop-card">
+          <div class="prop-card-img">
+            <img src="assets/images/hero.png" alt="Fraser Place Canary Wharf">
+          </div>
+          <div class="prop-card-body">
+            <p class="prop-card-tag">Fraser Place</p>
+            <h3 class="prop-card-name">Fraser Place Canary Wharf</h3>
+            <p class="prop-card-loc">&#127961; London, United Kingdom</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;">
+              <div class="prop-card-price">From <strong>£240</strong>/night</div>
+              <a href="property.html" class="btn btn-outline-gold" style="padding:7px 14px;font-size:11px;">View</a>
+            </div>
+          </div>
+        </div>
+        <div class="prop-card">
+          <div class="prop-card-img">
+            <img src="assets/images/lobby.png" alt="Fraser Suites Edinburgh">
+          </div>
+          <div class="prop-card-body">
+            <p class="prop-card-tag">Fraser Suites</p>
+            <h3 class="prop-card-name">Fraser Suites Edinburgh</h3>
+            <p class="prop-card-loc">&#127961; Edinburgh, United Kingdom</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;">
+              <div class="prop-card-price">From <strong>£210</strong>/night</div>
+              <a href="property.html" class="btn btn-outline-gold" style="padding:7px 14px;font-size:11px;">View</a>
+            </div>
+          </div>
+        </div>
+        <div class="prop-card">
+          <div class="prop-card-img">
+            <img src="assets/images/family.png" alt="Malmaison Manchester">
+          </div>
+          <div class="prop-card-body">
+            <p class="prop-card-tag">Malmaison</p>
+            <h3 class="prop-card-name">Malmaison Manchester</h3>
+            <p class="prop-card-loc">&#127961; Manchester, United Kingdom</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;">
+              <div class="prop-card-price">From <strong>£149</strong>/night</div>
+              <a href="property.html" class="btn btn-outline-gold" style="padding:7px 14px;font-size:11px;">View</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>For Guests</h4>
+        <ul>
+          <li><a href="#">Best Rate Guarantee</a></li>
+          <li><a href="#">Fraser World</a></li>
+          <li><a href="#">Long Stay</a></li>
+          <li><a href="#">Business Travel</a></li>
+          <li><a href="#">Fraser Cachet</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>For Corporate</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Business Development</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Brands</h4>
+        <ul>
+          <li><a href="#">Fraser Suites</a></li>
+          <li><a href="#">Fraser Residence</a></li>
+          <li><a href="#">Fraser Place</a></li>
+          <li><a href="#">Capri by Fraser</a></li>
+          <li><a href="#">Modena by Fraser</a></li>
+          <li><a href="#">Malmaison</a></li>
+          <li><a href="#">Hotel Du Vin &amp; Bistro</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy policy</a></li>
+          <li><a href="#">Cookie declaration</a></li>
+          <li><a href="#">Terms of use</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Sitemap</a></li>
+        </ul>
+      </div>
+      <div class="footer-brand-col">
+        <div class="footer-logo">Frasers <span>Hospitality</span></div>
+        <p class="footer-address">438 Alexandra Road, Alexandra Point Level 18, Singapore 119958</p>
+        <a class="footer-email" href="mailto:feedback@frashospitality.com">feedback@frashospitality.com</a>
+        <div class="footer-social">
+          <a href="#">f</a><a href="#">t</a><a href="#">y</a><a href="#">in</a><a href="#">ig</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Frasers Hospitality Pte Ltd. A member of Frasers Property Group.</span>
+      <div style="display:flex;gap:20px;">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

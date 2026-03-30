@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Extended Stay — Long Stay Living — Frasers Hospitality</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── HERO ── */
+    .es-hero {
+      position: relative;
+      height: 580px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .es-hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('assets/images/travel.png') center/cover no-repeat;
+    }
+    .es-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 60%, transparent 100%);
+    }
+    .es-hero-content {
+      position: relative;
+      padding: 0 80px;
+      max-width: 660px;
+    }
+    .es-hero-content .eyebrow { color: var(--gold); margin-bottom: 14px; }
+    .es-hero-content h1 { font-size: clamp(32px, 5vw, 58px); color: var(--white); margin-bottom: 18px; line-height: 1.1; }
+    .es-hero-content p { font-size: 16px; color: rgba(255,255,255,0.78); line-height: 1.7; margin-bottom: 36px; max-width: 480px; }
+    .es-hero-btns { display: flex; gap: 16px; }
+
+    /* ── SPLIT INTRO ── */
+    .split-intro { display: grid; grid-template-columns: 1fr 1fr; min-height: 500px; }
+    .split-intro-img { overflow: hidden; }
+    .split-intro-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .split-intro-text {
+      background: var(--cream);
+      padding: 80px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .split-intro-text .eyebrow { margin-bottom: 14px; }
+    .split-intro-text h2 { font-size: clamp(24px, 3vw, 36px); margin-bottom: 20px; }
+    .split-intro-text p { font-size: 14px; color: var(--gray); line-height: 1.8; margin-bottom: 16px; }
+    .split-intro-text a { margin-top: 24px; align-self: flex-start; }
+
+    /* ── FEATURES GRID ── */
+    .features-section { padding: 72px 48px; background: var(--white); }
+    .features-inner { max-width: 1200px; margin: 0 auto; }
+    .features-header { text-align: center; margin-bottom: 56px; }
+    .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .feature-card {
+      background: var(--cream);
+      padding: 36px 28px;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: box-shadow .3s, transform .3s;
+    }
+    .feature-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+    .feature-card-icon {
+      width: 64px; height: 64px;
+      background: var(--white);
+      border: 1.5px solid var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+      margin: 0 auto 20px;
+    }
+    .feature-card h3 { font-size: 17px; margin-bottom: 10px; }
+    .feature-card p { font-size: 13px; color: var(--gray); line-height: 1.7; }
+
+    /* ── PROPERTY SHOWCASE ── */
+    .showcase-section { padding: 72px 48px; background: var(--cream); }
+    .showcase-inner { max-width: 1200px; margin: 0 auto; }
+    .showcase-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 40px;
+    }
+    .showcase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .showcase-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: box-shadow .3s, transform .3s;
+    }
+    .showcase-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+    .showcase-card-img { height: 200px; overflow: hidden; }
+    .showcase-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; display: block; }
+    .showcase-card:hover .showcase-card-img img { transform: scale(1.05); }
+    .showcase-card-body { padding: 22px; }
+    .showcase-card-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .showcase-card h3 { font-size: 18px; margin-bottom: 4px; }
+    .showcase-card p { font-size: 12px; color: var(--gray); margin-bottom: 14px; }
+    .showcase-card-from { font-size: 12px; color: var(--gray); }
+    .showcase-card-from strong { font-family: 'Georgia', serif; font-size: 20px; color: var(--dark); }
+
+    /* ── TESTIMONIALS ── */
+    .es-testimonials { padding: 72px 48px; background: var(--white); }
+    .es-testimonials-inner { max-width: 1200px; margin: 0 auto; }
+    .es-testimonials-header { text-align: center; margin-bottom: 48px; }
+    .es-testimonials-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+    .es-testimonial-card {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 28px;
+      border: 1px solid var(--border);
+      padding: 32px;
+      background: var(--cream);
+    }
+    .es-testi-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .es-testi-avatar {
+      width: 72px; height: 72px;
+      background: var(--gold-light);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+    }
+    .es-testi-name { font-size: 12px; font-weight: 700; text-align: center; color: var(--dark); }
+    .es-testi-role { font-size: 10px; color: var(--gray); text-align: center; }
+    .es-testi-right {}
+    .es-testi-stars { color: var(--gold); font-size: 12px; margin-bottom: 12px; }
+    .es-testi-quote { font-family: 'Georgia', serif; font-size: 14px; font-style: italic; line-height: 1.8; color: var(--dark); }
+    .es-testi-stay { font-size: 11px; color: var(--gold); margin-top: 12px; }
+
+    /* ── CTA SECTION ── */
+    .es-cta {
+      position: relative;
+      padding: 100px 48px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .es-cta-bg {
+      position: absolute;
+      inset: 0;
+      background: url('assets/images/lobby.png') center/cover no-repeat;
+    }
+    .es-cta-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(28,28,28,0.72);
+    }
+    .es-cta-content {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .es-cta-content .eyebrow { color: var(--gold); margin-bottom: 14px; }
+    .es-cta-content h2 { font-size: 38px; color: var(--white); margin-bottom: 16px; }
+    .es-cta-content p { font-size: 15px; color: rgba(255,255,255,0.7); margin-bottom: 36px; line-height: 1.7; }
+    .es-cta-btns { display: flex; gap: 16px; justify-content: center; }
+  </style>
+</head>
+<body>
+
+  <!-- UTIL BAR -->
+  <div class="util-bar">
+    <div class="util-left">
+      <a href="#">EN</a>
+      <div class="util-divider"></div>
+      <a href="#">SGD</a>
+      <div class="util-divider"></div>
+      <a href="#">Frasers Hospitality</a>
+    </div>
+    <div class="util-right">
+      <a href="#">My reservations</a>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <span class="nav-hamburger">&#9776;</span>
+      <a href="index.html" class="nav-logo">
+        <span class="brand">Frasers</span>
+        <span class="sub">Hospitality</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="locations.html">Locations</a></li>
+        <li><a href="offers.html">Offers</a></li>
+        <li><a href="extended-stay.html" class="active">Extended Stay</a></li>
+        <li><a href="#">Business travel</a></li>
+        <li><a href="#">Our brands</a></li>
+        <li><a href="fraser-world.html">Fraser World</a></li>
+      </ul>
+      <div class="nav-actions">
+        <span class="nav-icon">&#128269;</span>
+        <span class="nav-icon">&#128100;</span>
+        <a href="#" class="btn-booknow">Book now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="es-hero">
+    <div class="es-hero-bg"></div>
+    <div class="es-hero-overlay"></div>
+    <div class="es-hero-content">
+      <p class="eyebrow">Long Stay Living</p>
+      <h1>Extended Stay in Extraordinary Places</h1>
+      <p>Whether you're relocating, on assignment or simply craving more time in a city you love — our extended stay residences offer the perfect home away from home.</p>
+      <div class="es-hero-btns">
+        <a href="locations.html" class="btn btn-gold">Find a property</a>
+        <a href="#features" class="btn btn-outline-white">Learn more</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPLIT INTRO -->
+  <section class="split-intro">
+    <div class="split-intro-img">
+      <img src="assets/images/family.png" alt="Family in luxury apartment">
+    </div>
+    <div class="split-intro-text">
+      <p class="eyebrow">City living, redefined</p>
+      <h2>Serviced Apartments for Long Stay City Living</h2>
+      <p>Our long stay serviced apartments combine the comfort and space of a private home with the amenities and service of a world-class hotel. With fully equipped kitchens, generous living areas and weekly housekeeping as standard, you'll settle into your new city with ease.</p>
+      <p>Whether you need a studio for one or a two-bedroom for the whole family, our flexible terms and competitive long-stay rates make Frasers the smart choice for extended travel.</p>
+      <a href="locations.html" class="btn btn-gold">Browse long stay properties</a>
+    </div>
+  </section>
+
+  <!-- FEATURES GRID -->
+  <section class="features-section" id="features">
+    <div class="features-inner">
+      <div class="features-header">
+        <p class="eyebrow">What's included</p>
+        <h2 class="section-title">Everything you need, nothing you don't</h2>
+        <p class="section-sub" style="margin:12px auto 0;text-align:center;">Our long stay residences are thoughtfully equipped to make extended city living as comfortable as possible.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-card-icon">&#127859;</div>
+          <h3>Fully Equipped Kitchen</h3>
+          <p>Cook at home with a full-size kitchen featuring hob, oven, refrigerator and all the essentials you need.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-icon">&#127719;</div>
+          <h3>Spacious Living Areas</h3>
+          <p>Separate bedroom, living room and dining area — real space to live, work and unwind in comfort.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-icon">&#129529;</div>
+          <h3>Housekeeping Service</h3>
+          <p>Weekly housekeeping keeps your residence immaculate, with linen changes included as standard.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-icon">&#128187;</div>
+          <h3>High-Speed Wi-Fi</h3>
+          <p>Complimentary fibre broadband throughout your stay for seamless remote working or streaming.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROPERTY SHOWCASE -->
+  <section class="showcase-section">
+    <div class="showcase-inner">
+      <div class="showcase-header">
+        <div>
+          <p class="eyebrow">Top destinations</p>
+          <h2 class="section-title">Popular long stay properties</h2>
+        </div>
+        <a href="locations.html" class="btn btn-outline-dark">View all</a>
+      </div>
+      <div class="showcase-grid">
+        <div class="showcase-card">
+          <div class="showcase-card-img">
+            <img src="assets/images/lobby.png" alt="Fraser Suites Singapore">
+          </div>
+          <div class="showcase-card-body">
+            <p class="showcase-card-tag">Fraser Suites &bull; Singapore</p>
+            <h3>Fraser Suites Singapore</h3>
+            <p>&#127961; River Valley Road, Singapore</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;">
+              <div class="showcase-card-from">Long stay from <strong>$220</strong>/nt</div>
+              <a href="property.html" class="btn btn-outline-gold" style="padding:7px 14px;font-size:11px;">View</a>
+            </div>
+          </div>
+        </div>
+        <div class="showcase-card">
+          <div class="showcase-card-img">
+            <img src="assets/images/hero.png" alt="Fraser Place Canary Wharf">
+          </div>
+          <div class="showcase-card-body">
+            <p class="showcase-card-tag">Fraser Place &bull; London</p>
+            <h3>Fraser Place Canary Wharf</h3>
+            <p>&#127961; Canary Wharf, London E14</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;">
+              <div class="showcase-card-from">Long stay from <strong>£170</strong>/nt</div>
+              <a href="property.html" class="btn btn-outline-gold" style="padding:7px 14px;font-size:11px;">View</a>
+            </div>
+          </div>
+        </div>
+        <div class="showcase-card">
+          <div class="showcase-card-img">
+            <img src="assets/images/suite.png" alt="Capri by Fraser Dubai">
+          </div>
+          <div class="showcase-card-body">
+            <p class="showcase-card-tag">Capri by Fraser &bull; Dubai</p>
+            <h3>Capri by Fraser, Dubai</h3>
+            <p>&#127961; Business Bay, Dubai</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;">
+              <div class="showcase-card-from">Long stay from <strong>$210</strong>/nt</div>
+              <a href="property.html" class="btn btn-outline-gold" style="padding:7px 14px;font-size:11px;">View</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="es-testimonials">
+    <div class="es-testimonials-inner">
+      <div class="es-testimonials-header">
+        <p class="eyebrow">Long stay stories</p>
+        <h2 class="section-title">What long stay guests say</h2>
+      </div>
+      <div class="es-testimonials-grid">
+        <div class="es-testimonial-card">
+          <div class="es-testi-left">
+            <div class="es-testi-avatar">&#128100;</div>
+            <p class="es-testi-name">Marcus Williams</p>
+            <p class="es-testi-role">Consulting Director</p>
+          </div>
+          <div class="es-testi-right">
+            <div class="es-testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="es-testi-quote">"I've stayed at Fraser Suites Singapore three times for project assignments. Having a proper kitchen and dedicated workspace makes such a difference — I can maintain a healthy routine even on a three-month engagement."</p>
+            <p class="es-testi-stay">Stayed 3 months &bull; Fraser Suites Singapore</p>
+          </div>
+        </div>
+        <div class="es-testimonial-card">
+          <div class="es-testi-left">
+            <div class="es-testi-avatar">&#128100;</div>
+            <p class="es-testi-name">The Nakamura Family</p>
+            <p class="es-testi-role">Relocation</p>
+          </div>
+          <div class="es-testi-right">
+            <div class="es-testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="es-testi-quote">"Moving to a new country with two young children was daunting, but Fraser Residence made it so much easier. The two-bedroom apartment was beautifully furnished, and the kids loved the pool. We treated it as our home for four months."</p>
+            <p class="es-testi-stay">Stayed 4 months &bull; Fraser Residence London</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="es-cta">
+    <div class="es-cta-bg"></div>
+    <div class="es-cta-overlay"></div>
+    <div class="es-cta-content">
+      <p class="eyebrow">Start planning</p>
+      <h2>Your long stay awaits</h2>
+      <p>Speak with our extended stay specialists to find the perfect residence for your assignment, relocation or city adventure.</p>
+      <div class="es-cta-btns">
+        <a href="locations.html" class="btn btn-gold">Browse properties</a>
+        <a href="#" class="btn btn-outline-white">Contact our team</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>For Guests</h4>
+        <ul>
+          <li><a href="#">Best Rate Guarantee</a></li>
+          <li><a href="#">Fraser World</a></li>
+          <li><a href="#">Long Stay</a></li>
+          <li><a href="#">Business Travel</a></li>
+          <li><a href="#">Fraser Cachet</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>For Corporate</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Business Development</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Brands</h4>
+        <ul>
+          <li><a href="#">Fraser Suites</a></li>
+          <li><a href="#">Fraser Residence</a></li>
+          <li><a href="#">Fraser Place</a></li>
+          <li><a href="#">Capri by Fraser</a></li>
+          <li><a href="#">Modena by Fraser</a></li>
+          <li><a href="#">Malmaison</a></li>
+          <li><a href="#">Hotel Du Vin &amp; Bistro</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy policy</a></li>
+          <li><a href="#">Cookie declaration</a></li>
+          <li><a href="#">Terms of use</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Sitemap</a></li>
+        </ul>
+      </div>
+      <div class="footer-brand-col">
+        <div class="footer-logo">Frasers <span>Hospitality</span></div>
+        <p class="footer-address">438 Alexandra Road, Alexandra Point Level 18, Singapore 119958</p>
+        <a class="footer-email" href="mailto:feedback@frashospitality.com">feedback@frashospitality.com</a>
+        <div class="footer-social">
+          <a href="#">f</a><a href="#">t</a><a href="#">y</a><a href="#">in</a><a href="#">ig</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Frasers Hospitality Pte Ltd. A member of Frasers Property Group.</span>
+      <div style="display:flex;gap:20px;">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

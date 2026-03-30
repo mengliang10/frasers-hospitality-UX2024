@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find a Property — Frasers Hospitality</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── PAGE HEADER ── */
+    .page-header {
+      background: var(--cream);
+      padding: 64px 48px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-header-inner { max-width: 1200px; margin: 0 auto; }
+    .page-header .eyebrow { margin-bottom: 10px; }
+    .page-header h1 { font-size: clamp(28px, 4vw, 46px); margin-bottom: 14px; }
+    .page-header p { font-size: 14px; color: var(--gray); max-width: 520px; line-height: 1.7; }
+
+    /* ── SEARCH / FILTER BAR ── */
+    .filter-bar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px;
+      position: sticky;
+      top: 64px;
+      z-index: 100;
+    }
+    .filter-bar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .filter-search {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 0;
+      border-right: 1px solid var(--border);
+      padding-right: 24px;
+    }
+    .filter-search input {
+      border: none;
+      outline: none;
+      font-size: 14px;
+      color: var(--dark);
+      flex: 1;
+      font-family: 'Georgia', serif;
+    }
+    .filter-search input::placeholder { color: var(--gray); }
+    .region-tabs {
+      display: flex;
+      gap: 0;
+      padding-left: 0;
+    }
+    .region-tab {
+      padding: 20px 20px;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      color: var(--gray);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+      white-space: nowrap;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: 1px solid var(--border);
+    }
+    .region-tab:last-child { border-right: none; }
+    .region-tab:hover { color: var(--dark); }
+    .region-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    /* ── RESULTS BAR ── */
+    .results-bar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .results-count { font-size: 13px; color: var(--gray); }
+    .results-count strong { color: var(--dark); }
+    .sort-select {
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      font-size: 12px;
+      color: var(--dark);
+      background: var(--white);
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* ── PROPERTY LISTING ── */
+    .listings-section { background: var(--white); padding-bottom: 80px; }
+    .listings-inner { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+    .listing-grid { display: flex; flex-direction: column; gap: 24px; }
+    .listing-card {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      border: 1px solid var(--border);
+      transition: box-shadow .3s;
+      background: var(--white);
+    }
+    .listing-card:hover { box-shadow: var(--shadow-lg); }
+    .listing-img {
+      overflow: hidden;
+      height: 220px;
+    }
+    .listing-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .5s;
+      display: block;
+    }
+    .listing-card:hover .listing-img img { transform: scale(1.04); }
+    .listing-body {
+      padding: 28px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .listing-top {}
+    .listing-brand {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .listing-name { font-size: 22px; margin-bottom: 4px; }
+    .listing-location { font-size: 12px; color: var(--gray); margin-bottom: 16px; }
+    .listing-type {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      color: var(--gray);
+      padding: 3px 10px;
+      margin-bottom: 16px;
+    }
+    .listing-amenities { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 16px; }
+    .listing-amenity {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--gray);
+    }
+    .listing-amenity span { font-size: 14px; }
+    .listing-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .listing-price { font-size: 13px; color: var(--gray); }
+    .listing-price strong { font-family: 'Georgia', serif; font-size: 22px; color: var(--dark); }
+    .listing-actions { display: flex; gap: 10px; }
+
+    /* ── PAGINATION ── */
+    .pagination {
+      max-width: 1200px;
+      margin: 48px auto 0;
+      padding: 0 48px;
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+    }
+    .page-btn {
+      width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--dark);
+      cursor: pointer;
+      transition: all .2s;
+      background: var(--white);
+    }
+    .page-btn:hover, .page-btn.active { background: var(--gold); color: var(--white); border-color: var(--gold); }
+  </style>
+</head>
+<body>
+
+  <!-- UTIL BAR -->
+  <div class="util-bar">
+    <div class="util-left">
+      <a href="#">EN</a>
+      <div class="util-divider"></div>
+      <a href="#">SGD</a>
+      <div class="util-divider"></div>
+      <a href="#">Frasers Hospitality</a>
+    </div>
+    <div class="util-right">
+      <a href="#">My reservations</a>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <span class="nav-hamburger">&#9776;</span>
+      <a href="index.html" class="nav-logo">
+        <span class="brand">Frasers</span>
+        <span class="sub">Hospitality</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="locations.html" class="active">Locations</a></li>
+        <li><a href="offers.html">Offers</a></li>
+        <li><a href="extended-stay.html">Extended Stay</a></li>
+        <li><a href="#">Business travel</a></li>
+        <li><a href="#">Our brands</a></li>
+        <li><a href="fraser-world.html">Fraser World</a></li>
+      </ul>
+      <div class="nav-actions">
+        <span class="nav-icon">&#128269;</span>
+        <span class="nav-icon">&#128100;</span>
+        <a href="#" class="btn-booknow">Book now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-inner">
+      <p class="eyebrow">Our properties</p>
+      <h1>A world of serviced and hotel residences</h1>
+      <p>Discover our portfolio of over 140 properties in 80+ cities across Asia Pacific, Europe, the Middle East and Africa.</p>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <div class="filter-bar-inner">
+      <div class="filter-search">
+        <span style="font-size:16px;color:var(--gray);">&#128269;</span>
+        <input type="text" placeholder="Search by city, country or property name...">
+      </div>
+      <div class="region-tabs">
+        <button class="region-tab active">All Regions</button>
+        <button class="region-tab">Asia Pacific</button>
+        <button class="region-tab">Europe</button>
+        <button class="region-tab">Middle East &amp; Africa</button>
+        <button class="region-tab">Americas</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LISTINGS -->
+  <section class="listings-section">
+    <div class="results-bar">
+      <p class="results-count">Showing <strong>8</strong> of 143 properties</p>
+      <select class="sort-select">
+        <option>Sort: Recommended</option>
+        <option>Price: Low to high</option>
+        <option>Price: High to low</option>
+        <option>Newest</option>
+      </select>
+    </div>
+    <div class="listings-inner">
+      <div class="listing-grid">
+
+        <!-- Property 1 -->
+        <div class="listing-card">
+          <div class="listing-img">
+            <img src="assets/images/lobby.png" alt="Fraser Suites Singapore">
+          </div>
+          <div class="listing-body">
+            <div class="listing-top">
+              <p class="listing-brand">Fraser Suites</p>
+              <h2 class="listing-name">Fraser Suites Singapore</h2>
+              <p class="listing-location">&#127961; 491 River Valley Road, Singapore 248371</p>
+              <span class="listing-type">Serviced Residence</span>
+              <div class="listing-amenities">
+                <div class="listing-amenity"><span>&#127946;</span> Swimming Pool</div>
+                <div class="listing-amenity"><span>&#127947;</span> Fitness Centre</div>
+                <div class="listing-amenity"><span>&#127859;</span> Kitchenette</div>
+                <div class="listing-amenity"><span>&#128506;</span> Concierge</div>
+                <div class="listing-amenity"><span>&#128663;</span> Parking</div>
+              </div>
+            </div>
+            <div class="listing-footer">
+              <div class="listing-price">From <strong>$320</strong> / night</div>
+              <div class="listing-actions">
+                <a href="property.html" class="btn btn-outline-dark" style="padding:9px 18px;font-size:11px;">View property</a>
+                <a href="#" class="btn btn-gold" style="padding:9px 18px;font-size:11px;">Book now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Property 2 -->
+        <div class="listing-card">
+          <div class="listing-img">
+            <img src="assets/images/room-classic.png" alt="Fraser Suites Glasgow">
+          </div>
+          <div class="listing-body">
+            <div class="listing-top">
+              <p class="listing-brand">Fraser Suites</p>
+              <h2 class="listing-name">Fraser Suites Glasgow</h2>
+              <p class="listing-location">&#127961; 1–19 Albion Street, Glasgow, United Kingdom</p>
+              <span class="listing-type">Serviced Residence</span>
+              <div class="listing-amenities">
+                <div class="listing-amenity"><span>&#127947;</span> Fitness Centre</div>
+                <div class="listing-amenity"><span>&#128187;</span> Business Centre</div>
+                <div class="listing-amenity"><span>&#127859;</span> Full Kitchen</div>
+                <div class="listing-amenity"><span>&#128506;</span> Concierge</div>
+              </div>
+            </div>
+            <div class="listing-footer">
+              <div class="listing-price">From <strong>£195</strong> / night</div>
+              <div class="listing-actions">
+                <a href="property.html" class="btn btn-outline-dark" style="padding:9px 18px;font-size:11px;">View property</a>
+                <a href="#" class="btn btn-gold" style="padding:9px 18px;font-size:11px;">Book now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Property 3 -->
+        <div class="listing-card">
+          <div class="listing-img">
+            <img src="assets/images/suite.png" alt="Capri by Fraser Dubai">
+          </div>
+          <div class="listing-body">
+            <div class="listing-top">
+              <p class="listing-brand">Capri by Fraser</p>
+              <h2 class="listing-name">Capri by Fraser, Dubai</h2>
+              <p class="listing-location">&#127961; Business Bay, Dubai, United Arab Emirates</p>
+              <span class="listing-type">Hotel Residence</span>
+              <div class="listing-amenities">
+                <div class="listing-amenity"><span>&#127946;</span> Rooftop Pool</div>
+                <div class="listing-amenity"><span>&#127947;</span> Gym</div>
+                <div class="listing-amenity"><span>&#127860;</span> Restaurant</div>
+                <div class="listing-amenity"><span>&#127774;</span> Spa</div>
+              </div>
+            </div>
+            <div class="listing-footer">
+              <div class="listing-price">From <strong>$280</strong> / night</div>
+              <div class="listing-actions">
+                <a href="property.html" class="btn btn-outline-dark" style="padding:9px 18px;font-size:11px;">View property</a>
+                <a href="#" class="btn btn-gold" style="padding:9px 18px;font-size:11px;">Book now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Property 4 -->
+        <div class="listing-card">
+          <div class="listing-img">
+            <img src="assets/images/hero.png" alt="Fraser Place Canary Wharf London">
+          </div>
+          <div class="listing-body">
+            <div class="listing-top">
+              <p class="listing-brand">Fraser Place</p>
+              <h2 class="listing-name">Fraser Place Canary Wharf, London</h2>
+              <p class="listing-location">&#127961; 25 Westferry Circus, Canary Wharf, London E14 8RS</p>
+              <span class="listing-type">Serviced Apartment</span>
+              <div class="listing-amenities">
+                <div class="listing-amenity"><span>&#127946;</span> Pool</div>
+                <div class="listing-amenity"><span>&#127947;</span> Gym</div>
+                <div class="listing-amenity"><span>&#127859;</span> Kitchen</div>
+                <div class="listing-amenity"><span>&#128663;</span> Parking</div>
+                <div class="listing-amenity"><span>&#128506;</span> Concierge</div>
+              </div>
+            </div>
+            <div class="listing-footer">
+              <div class="listing-price">From <strong>£240</strong> / night</div>
+              <div class="listing-actions">
+                <a href="property.html" class="btn btn-outline-dark" style="padding:9px 18px;font-size:11px;">View property</a>
+                <a href="#" class="btn btn-gold" style="padding:9px 18px;font-size:11px;">Book now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Property 5 -->
+        <div class="listing-card">
+          <div class="listing-img">
+            <img src="assets/images/room-modern.png" alt="Fraser Residence Orchard Singapore">
+          </div>
+          <div class="listing-body">
+            <div class="listing-top">
+              <p class="listing-brand">Fraser Residence</p>
+              <h2 class="listing-name">Fraser Residence Orchard, Singapore</h2>
+              <p class="listing-location">&#127961; 71 Orchard Road, Singapore 238871</p>
+              <span class="listing-type">Gold Standard Residence</span>
+              <div class="listing-amenities">
+                <div class="listing-amenity"><span>&#127946;</span> Infinity Pool</div>
+                <div class="listing-amenity"><span>&#127947;</span> Gym</div>
+                <div class="listing-amenity"><span>&#127860;</span> Restaurant</div>
+                <div class="listing-amenity"><span>&#127774;</span> Spa</div>
+                <div class="listing-amenity"><span>&#128187;</span> Business Centre</div>
+              </div>
+            </div>
+            <div class="listing-footer">
+              <div class="listing-price">From <strong>$395</strong> / night</div>
+              <div class="listing-actions">
+                <a href="property.html" class="btn btn-outline-dark" style="padding:9px 18px;font-size:11px;">View property</a>
+                <a href="#" class="btn btn-gold" style="padding:9px 18px;font-size:11px;">Book now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Property 6 -->
+        <div class="listing-card">
+          <div class="listing-img">
+            <img src="assets/images/business.png" alt="Modena by Fraser Kuala Lumpur">
+          </div>
+          <div class="listing-body">
+            <div class="listing-top">
+              <p class="listing-brand">Modena by Fraser</p>
+              <h2 class="listing-name">Modena by Fraser, Kuala Lumpur</h2>
+              <p class="listing-location">&#127961; No.1 Jalan Kiara, Mont Kiara, Kuala Lumpur</p>
+              <span class="listing-type">Serviced Apartment</span>
+              <div class="listing-amenities">
+                <div class="listing-amenity"><span>&#127946;</span> Pool</div>
+                <div class="listing-amenity"><span>&#127947;</span> Gym</div>
+                <div class="listing-amenity"><span>&#127859;</span> Kitchen</div>
+                <div class="listing-amenity"><span>&#128663;</span> Parking</div>
+              </div>
+            </div>
+            <div class="listing-footer">
+              <div class="listing-price">From <strong>RM 480</strong> / night</div>
+              <div class="listing-actions">
+                <a href="property.html" class="btn btn-outline-dark" style="padding:9px 18px;font-size:11px;">View property</a>
+                <a href="#" class="btn btn-gold" style="padding:9px 18px;font-size:11px;">Book now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Property 7 -->
+        <div class="listing-card">
+          <div class="listing-img">
+            <img src="assets/images/family.png" alt="Malmaison Manchester">
+          </div>
+          <div class="listing-body">
+            <div class="listing-top">
+              <p class="listing-brand">Malmaison</p>
+              <h2 class="listing-name">Malmaison Manchester</h2>
+              <p class="listing-location">&#127961; 1–3 Piccadilly, Manchester M1 3AQ</p>
+              <span class="listing-type">Boutique Hotel</span>
+              <div class="listing-amenities">
+                <div class="listing-amenity"><span>&#127860;</span> Brasserie</div>
+                <div class="listing-amenity"><span>&#127947;</span> Gym</div>
+                <div class="listing-amenity"><span>&#127774;</span> Chez Mal Spa</div>
+                <div class="listing-amenity"><span>&#128506;</span> Concierge</div>
+              </div>
+            </div>
+            <div class="listing-footer">
+              <div class="listing-price">From <strong>£149</strong> / night</div>
+              <div class="listing-actions">
+                <a href="property.html" class="btn btn-outline-dark" style="padding:9px 18px;font-size:11px;">View property</a>
+                <a href="#" class="btn btn-gold" style="padding:9px 18px;font-size:11px;">Book now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Property 8 -->
+        <div class="listing-card">
+          <div class="listing-img">
+            <img src="assets/images/travel.png" alt="Hotel Du Vin Bristol">
+          </div>
+          <div class="listing-body">
+            <div class="listing-top">
+              <p class="listing-brand">Hotel Du Vin</p>
+              <h2 class="listing-name">Hotel Du Vin &amp; Bistro, Bristol</h2>
+              <p class="listing-location">&#127961; The Sugar House, Narrow Lewins Mead, Bristol BS1 2NU</p>
+              <span class="listing-type">Boutique Hotel</span>
+              <div class="listing-amenities">
+                <div class="listing-amenity"><span>&#127860;</span> Bistro</div>
+                <div class="listing-amenity"><span>&#127863;</span> Wine Cellar</div>
+                <div class="listing-amenity"><span>&#127774;</span> Spa</div>
+                <div class="listing-amenity"><span>&#127947;</span> Gym</div>
+              </div>
+            </div>
+            <div class="listing-footer">
+              <div class="listing-price">From <strong>£139</strong> / night</div>
+              <div class="listing-actions">
+                <a href="property.html" class="btn btn-outline-dark" style="padding:9px 18px;font-size:11px;">View property</a>
+                <a href="#" class="btn btn-gold" style="padding:9px 18px;font-size:11px;">Book now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /listing-grid -->
+
+      <!-- PAGINATION -->
+      <div class="pagination">
+        <div class="page-btn active">1</div>
+        <div class="page-btn">2</div>
+        <div class="page-btn">3</div>
+        <div class="page-btn">&#8230;</div>
+        <div class="page-btn">18</div>
+        <div class="page-btn">&#8250;</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>For Guests</h4>
+        <ul>
+          <li><a href="#">Best Rate Guarantee</a></li>
+          <li><a href="#">Fraser World</a></li>
+          <li><a href="#">Long Stay</a></li>
+          <li><a href="#">Business Travel</a></li>
+          <li><a href="#">Fraser Cachet</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>For Corporate</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Business Development</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Brands</h4>
+        <ul>
+          <li><a href="#">Fraser Suites</a></li>
+          <li><a href="#">Fraser Residence</a></li>
+          <li><a href="#">Fraser Place</a></li>
+          <li><a href="#">Capri by Fraser</a></li>
+          <li><a href="#">Modena by Fraser</a></li>
+          <li><a href="#">Malmaison</a></li>
+          <li><a href="#">Hotel Du Vin &amp; Bistro</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy policy</a></li>
+          <li><a href="#">Cookie declaration</a></li>
+          <li><a href="#">Terms of use</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Sitemap</a></li>
+        </ul>
+      </div>
+      <div class="footer-brand-col">
+        <div class="footer-logo">Frasers <span>Hospitality</span></div>
+        <p class="footer-address">438 Alexandra Road, Alexandra Point Level 18, Singapore 119958</p>
+        <a class="footer-email" href="mailto:feedback@frashospitality.com">feedback@frashospitality.com</a>
+        <div class="footer-social">
+          <a href="#">f</a><a href="#">t</a><a href="#">y</a><a href="#">in</a><a href="#">ig</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Frasers Hospitality Pte Ltd. A member of Frasers Property Group.</span>
+      <div style="display:flex;gap:20px;">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

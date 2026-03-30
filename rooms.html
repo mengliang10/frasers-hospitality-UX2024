@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Room Types — Fraser Suites Glasgow — Frasers Hospitality</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ── PAGE HEADER ── */
+    .rooms-page-header {
+      background: url('assets/images/room-modern.png') center/cover no-repeat;
+      position: relative;
+      padding: 100px 48px 60px;
+    }
+    .rooms-page-header-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(28,28,28,0.55);
+    }
+    .rooms-page-header-content {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .rooms-page-header .eyebrow { color: var(--gold); margin-bottom: 12px; }
+    .rooms-page-header h1 { font-size: clamp(28px, 4vw, 46px); color: var(--white); margin-bottom: 10px; }
+    .rooms-page-header p { font-size: 14px; color: rgba(255,255,255,0.75); max-width: 500px; line-height: 1.7; }
+
+    /* ── CATEGORY TABS ── */
+    .room-tabs {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 64px;
+      z-index: 100;
+    }
+    .room-tabs-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .room-tab-list { display: flex; gap: 0; }
+    .room-tab-btn {
+      padding: 18px 28px;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      color: var(--gray);
+      border: none;
+      background: none;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+    .room-tab-btn:hover { color: var(--dark); }
+    .room-tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .room-tabs-sort {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--gray);
+    }
+    .room-tabs-sort select {
+      border: 1px solid var(--border);
+      padding: 7px 12px;
+      font-size: 12px;
+      color: var(--dark);
+      background: var(--white);
+      outline: none;
+    }
+
+    /* ── ROOMS LISTING ── */
+    .room-listing-section { padding: 56px 48px 80px; background: var(--cream); }
+    .room-listing-inner { max-width: 1200px; margin: 0 auto; }
+    .room-listing-grid { display: flex; flex-direction: column; gap: 28px; }
+
+    .room-listing-card {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      background: var(--white);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: box-shadow .3s;
+    }
+    .room-listing-card:hover { box-shadow: var(--shadow-lg); }
+    .rlc-img { overflow: hidden; position: relative; }
+    .rlc-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; display: block; }
+    .room-listing-card:hover .rlc-img img { transform: scale(1.04); }
+    .rlc-tag {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: var(--gold);
+      color: var(--white);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+    }
+    .rlc-body {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .rlc-top {}
+    .rlc-category {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .rlc-name { font-size: 24px; margin-bottom: 6px; }
+    .rlc-subtitle { font-size: 13px; color: var(--gray); margin-bottom: 20px; }
+    .rlc-specs {
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+      gap: 0;
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+      width: fit-content;
+    }
+    .rlc-spec {
+      padding: 10px 16px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      color: var(--dark);
+    }
+    .rlc-spec:last-child { border-right: none; }
+    .rlc-spec-icon { font-size: 14px; }
+    .rlc-features { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+    .rlc-feature-tag {
+      font-size: 10px;
+      letter-spacing: 0.5px;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      color: var(--gray);
+      padding: 4px 10px;
+    }
+    .rlc-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .rlc-price { font-size: 13px; color: var(--gray); }
+    .rlc-price strong { font-family: 'Georgia', serif; font-size: 26px; color: var(--dark); }
+    .rlc-price span { font-size: 12px; }
+    .rlc-actions { display: flex; gap: 10px; }
+
+    /* ── LONG STAY CTA ── */
+    .long-stay-cta {
+      background: var(--footer-bg);
+      padding: 72px 48px;
+    }
+    .long-stay-cta-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .lsc-text .eyebrow { color: var(--gold); margin-bottom: 12px; }
+    .lsc-text h2 { font-size: 34px; color: var(--white); margin-bottom: 16px; }
+    .lsc-text p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 28px; }
+    .lsc-benefits { display: flex; flex-direction: column; gap: 14px; }
+    .lsc-benefit { display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.75); font-size: 13px; }
+    .lsc-benefit-check { color: var(--gold); font-size: 14px; flex-shrink: 0; }
+    .lsc-img { overflow: hidden; height: 320px; }
+    .lsc-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  </style>
+</head>
+<body>
+
+  <!-- UTIL BAR -->
+  <div class="util-bar">
+    <div class="util-left">
+      <a href="#">EN</a>
+      <div class="util-divider"></div>
+      <a href="#">SGD</a>
+      <div class="util-divider"></div>
+      <a href="#">Frasers Hospitality</a>
+    </div>
+    <div class="util-right">
+      <a href="#">My reservations</a>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <span class="nav-hamburger">&#9776;</span>
+      <a href="index.html" class="nav-logo">
+        <span class="brand">Frasers</span>
+        <span class="sub">Hospitality</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="locations.html" class="active">Locations</a></li>
+        <li><a href="offers.html">Offers</a></li>
+        <li><a href="extended-stay.html">Extended Stay</a></li>
+        <li><a href="#">Business travel</a></li>
+        <li><a href="#">Our brands</a></li>
+        <li><a href="fraser-world.html">Fraser World</a></li>
+      </ul>
+      <div class="nav-actions">
+        <span class="nav-icon">&#128269;</span>
+        <span class="nav-icon">&#128100;</span>
+        <a href="#" class="btn-booknow">Book now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="rooms-page-header">
+    <div class="rooms-page-header-overlay"></div>
+    <div class="rooms-page-header-content">
+      <p class="eyebrow">Fraser Suites Glasgow</p>
+      <h1>For every type of traveller</h1>
+      <p>From compact studio apartments to spacious two-bedroom residences — find the room that feels just right for your stay.</p>
+    </div>
+  </div>
+
+  <!-- CATEGORY TABS -->
+  <div class="room-tabs">
+    <div class="room-tabs-inner">
+      <div class="room-tab-list">
+        <button class="room-tab-btn active">All rooms</button>
+        <button class="room-tab-btn">Studios</button>
+        <button class="room-tab-btn">One Bedroom</button>
+        <button class="room-tab-btn">Two Bedroom</button>
+      </div>
+      <div class="room-tabs-sort">
+        <span>Sort by:</span>
+        <select>
+          <option>Price: Low to high</option>
+          <option>Price: High to low</option>
+          <option>Size: Largest first</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROOM LISTING -->
+  <section class="room-listing-section">
+    <div class="room-listing-inner">
+      <div class="room-listing-grid">
+
+        <!-- Room 1 -->
+        <div class="room-listing-card">
+          <div class="rlc-img">
+            <img src="assets/images/room-classic.png" alt="Studio Classic">
+            <span class="rlc-tag">Best seller</span>
+          </div>
+          <div class="rlc-body">
+            <div class="rlc-top">
+              <p class="rlc-category">Studio</p>
+              <h2 class="rlc-name">Studio Classic</h2>
+              <p class="rlc-subtitle">A beautifully appointed studio with exposed Victorian brickwork and modern comforts.</p>
+              <div class="rlc-specs">
+                <div class="rlc-spec"><span class="rlc-spec-icon">&#128716;</span> 28 m²</div>
+                <div class="rlc-spec"><span class="rlc-spec-icon">&#128716;</span> 1 King bed</div>
+                <div class="rlc-spec"><span class="rlc-spec-icon">&#128100;</span> Up to 2 guests</div>
+                <div class="rlc-spec"><span class="rlc-spec-icon">&#127759;</span> City view</div>
+              </div>
+              <div class="rlc-features">
+                <span class="rlc-feature-tag">Kitchenette</span>
+                <span class="rlc-feature-tag">Free Wi-Fi</span>
+                <span class="rlc-feature-tag">Flat-screen TV</span>
+                <span class="rlc-feature-tag">Safe</span>
+                <span class="rlc-feature-tag">Desk</span>
+              </div>
+            </div>
+            <div class="rlc-footer">
+              <div class="rlc-price">From <strong>£195</strong><span>/night</span></div>
+              <div class="rlc-actions">
+                <a href="room-detail.html" class="btn btn-outline-dark" style="padding:10px 20px;font-size:11px;">Details</a>
+                <a href="#" class="btn btn-gold" style="padding:10px 20px;font-size:11px;">Book now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Room 2 -->
+        <div class="room-listing-card">
+          <div class="rlc-img">
+            <img src="assets/images/suite.png" alt="Studio Deluxe">
+          </div>
+          <div class="rlc-body">
+            <div class="rlc-top">
+              <p class="rlc-category">Studio</p>
+              <h2 class="rlc-name">Studio Deluxe</h2>
+              <p class="rlc-subtitle">A larger studio with a fully equipped kitchen and elegant contemporary furnishings.</p>
+              <div class="rlc-specs">
+                <div class="rlc-spec"><span class="rlc-spec-icon">&#128716;</span> 36 m²</div>
+                <div class="rlc-spec"><span class="rlc-spec-icon">&#128716;</span> 1 King bed</div>
+                <div class="rlc-spec"><span class="rlc-spec-icon">&#128100;</span> Up to 2 guests</div>
+                <div class="rlc-spec"><span class="rlc-spec-icon">&#127759;</span> City view</div>
+              </div>
+              <div class="rlc-features">
+                <span class="rlc-feature-tag">Full kitchen</span>
+                <span class="rlc-feature-tag">Free Wi-Fi</span>
+                <span class="rlc-feature-tag">Washer-dryer</span>
+                <span class="rlc-feature-tag">Flat-screen TV</span>
+                <span class="rlc-feature-tag">Safe</span>
+              </div>
+            </div>
+            <div class="rlc-footer">
+              <div class="rlc-price">From <strong>£225</strong><span>/night</span></div>
+              <div class="rlc-actions">
+                <a href="room-detail.html" class="btn btn-outline-dark" style="padding:10px 20px;font-size:11px;">Details</a>
+                <a href="#" class="btn btn-gold" style="padding:10px 20px;font-size:11px;">Book now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Room 3 -->
+        <div class="room-listing-card">
+          <div class="rlc-img">
+            <img src="assets/images/hero.png" alt="One Bedroom Apartment">
+            <span class="rlc-tag">Great for families</span>
+          </div>
+          <div class="rlc-body">
+            <div class="rlc-top">
+              <p class="rlc-category">One Bedroom</p>
+              <h2 class="rlc-name">One Bedroom Apartment</h2>
+              <p class="rlc-subtitle">Separate bedroom and living area with a generous fully equipped kitchen — ideal for extended stays.</p>
+              <div class="rlc-specs">
+                <div class="rlc-spec"><span class="rlc-spec-icon">&#128716;</span> 52 m²</div>
+                <div class="rlc-spec"><span class="rlc-spec-icon">&#128716;</span> 1 King bed</div>
+                <div class="rlc-spec"><span class="rlc-spec-icon">&#128100;</span> Up to 3 guests</div>
+                <div class="rlc-spec"><span class="rlc-spec-icon">&#127759;</span> Merchant City view</div>
+              </div>
+              <div class="rlc-features">
+                <span class="rlc-feature-tag">Full kitchen</span>
+                <span class="rlc-feature-tag">Living room</span>
+                <span class="rlc-feature-tag">Dining area</span>
+                <span class="rlc-feature-tag">Washer-dryer</span>
+                <span class="rlc-feature-tag">Free Wi-Fi</span>
+              </div>
+            </div>
+            <div class="rlc-footer">
+              <div class="rlc-price">From <strong>£295</strong><span>/night</span></div>
+              <div class="rlc-actions">
+                <a href="room-detail.html" class="btn btn-outline-dark" style="padding:10px 20px;font-size:11px;">Details</a>
+                <a href="#" class="btn btn-gold" style="padding:10px 20px;font-size:11px;">Book now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Room 4 -->
+        <div class="room-listing-card">
+          <div class="rlc-img">
+            <img src="assets/images/lobby.png" alt="Two Bedroom Apartment">
+            <span class="rlc-tag">Most spacious</span>
+          </div>
+          <div class="rlc-body">
+            <div class="rlc-top">
+              <p class="rlc-category">Two Bedroom</p>
+              <h2 class="rlc-name">Two Bedroom Apartment</h2>
+              <p class="rlc-subtitle">Our most spacious offering — two separate bedrooms with a grand living and dining area, perfect for families or small groups.</p>
+              <div class="rlc-specs">
+                <div class="rlc-spec"><span class="rlc-spec-icon">&#128716;</span> 78 m²</div>
+                <div class="rlc-spec"><span class="rlc-spec-icon">&#128716;</span> 2 beds</div>
+                <div class="rlc-spec"><span class="rlc-spec-icon">&#128100;</span> Up to 4 guests</div>
+                <div class="rlc-spec"><span class="rlc-spec-icon">&#127759;</span> Panoramic view</div>
+              </div>
+              <div class="rlc-features">
+                <span class="rlc-feature-tag">Full kitchen</span>
+                <span class="rlc-feature-tag">2 bathrooms</span>
+                <span class="rlc-feature-tag">Living room</span>
+                <span class="rlc-feature-tag">Dining area</span>
+                <span class="rlc-feature-tag">Washer-dryer</span>
+              </div>
+            </div>
+            <div class="rlc-footer">
+              <div class="rlc-price">From <strong>£395</strong><span>/night</span></div>
+              <div class="rlc-actions">
+                <a href="room-detail.html" class="btn btn-outline-dark" style="padding:10px 20px;font-size:11px;">Details</a>
+                <a href="#" class="btn btn-gold" style="padding:10px 20px;font-size:11px;">Book now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- LONG STAY CTA -->
+  <section class="long-stay-cta">
+    <div class="long-stay-cta-inner">
+      <div class="lsc-text">
+        <p class="eyebrow">Looking for a long stay?</p>
+        <h2>Stay longer and save more</h2>
+        <p>Planning an extended stay of 7 nights or more? Our long stay rates offer significant savings, flexible terms and all the comforts of home.</p>
+        <div class="lsc-benefits">
+          <div class="lsc-benefit"><span class="lsc-benefit-check">&#10003;</span> Save up to 25% on stays of 7+ nights</div>
+          <div class="lsc-benefit"><span class="lsc-benefit-check">&#10003;</span> Flexible cancellation terms available</div>
+          <div class="lsc-benefit"><span class="lsc-benefit-check">&#10003;</span> Weekly housekeeping included</div>
+          <div class="lsc-benefit"><span class="lsc-benefit-check">&#10003;</span> Dedicated long stay concierge team</div>
+          <div class="lsc-benefit"><span class="lsc-benefit-check">&#10003;</span> Complimentary high-speed Wi-Fi</div>
+        </div>
+        <a href="extended-stay.html" class="btn btn-gold" style="margin-top:28px;">Explore extended stay</a>
+      </div>
+      <div class="lsc-img">
+        <img src="assets/images/family.png" alt="Family in apartment">
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>For Guests</h4>
+        <ul>
+          <li><a href="#">Best Rate Guarantee</a></li>
+          <li><a href="#">Fraser World</a></li>
+          <li><a href="#">Long Stay</a></li>
+          <li><a href="#">Business Travel</a></li>
+          <li><a href="#">Fraser Cachet</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>For Corporate</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Business Development</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Brands</h4>
+        <ul>
+          <li><a href="#">Fraser Suites</a></li>
+          <li><a href="#">Fraser Residence</a></li>
+          <li><a href="#">Fraser Place</a></li>
+          <li><a href="#">Capri by Fraser</a></li>
+          <li><a href="#">Modena by Fraser</a></li>
+          <li><a href="#">Malmaison</a></li>
+          <li><a href="#">Hotel Du Vin &amp; Bistro</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy policy</a></li>
+          <li><a href="#">Cookie declaration</a></li>
+          <li><a href="#">Terms of use</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Contact us</a></li>
+          <li><a href="#">Sitemap</a></li>
+        </ul>
+      </div>
+      <div class="footer-brand-col">
+        <div class="footer-logo">Frasers <span>Hospitality</span></div>
+        <p class="footer-address">438 Alexandra Road, Alexandra Point Level 18, Singapore 119958</p>
+        <a class="footer-email" href="mailto:feedback@frashospitality.com">feedback@frashospitality.com</a>
+        <div class="footer-social">
+          <a href="#">f</a><a href="#">t</a><a href="#">y</a><a href="#">in</a><a href="#">ig</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 Frasers Hospitality Pte Ltd. A member of Frasers Property Group.</span>
+      <div style="display:flex;gap:20px;">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
