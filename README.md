@@ -4,6 +4,18 @@ A UX research and design project conducted by **PSYKHE** for Frasers Hospitality
 
 ---
 
+## Live preview
+
+[**View the live Frasers Hospitality UX2024 prototype**](https://mengliang10.github.io/frasers-hospitality-UX2024/)
+
+**Direct URL:** https://mengliang10.github.io/frasers-hospitality-UX2024/
+
+**Publishing:** The repository default branch is `master`. The existing GitHub Pages configuration publishes from `master` (Settings → Pages → Deploy from a branch). Changes pushed to `master` update the prototype site. `.github/workflows/pages.yml` is included as a *manual* GitHub Actions publishing alternative if the Pages source is changed to **GitHub Actions**; do not use both methods concurrently.
+
+This is a UX design research **prototype**, not the official Frasers Hospitality booking website. Forms, rates and offers are illustrative.
+
+---
+
 ## Background
 
 Frasers Hospitality's website had not been revamped since 2022. This project was commissioned to identify friction points across the user journey and provide actionable design recommendations to increase revenue, membership sign-ups, and overall user experience.
@@ -140,3 +152,12 @@ Covers the following pages, with before/after comparisons where applicable:
 | City Guide | Integrated Explore content, improved organisation |
 | Global Sales / FH25 Campaign | Clearer campaign mechanics |
 | 404 Page | Helpful alternatives and navigation options |
+
+---
+
+## Prototype build notes
+
+- Images are optimised JPGs (about 15.5 MB of PNGs reduced to the figure in the commit), in line with the mobile-speed recommendation above.
+- Images below the masthead use native lazy loading.
+- Every page has a meta description and a canonical URL, a skip link, and a keyboard-accessible menu button.
+- Pages stay `noindex` while this is a prototype.
