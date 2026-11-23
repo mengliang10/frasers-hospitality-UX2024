@@ -6,15 +6,21 @@ A UX research and design project conducted by **PSYKHE** for Frasers Hospitality
 
 ## Live preview
 
-[**View the live Frasers Hospitality UX2024 prototype**](https://mengliang10.github.io/frasers-hospitality-UX2024/)
+https://mengliang10.github.io/frasers-hospitality-UX2024/
 
-**Direct URL:** https://mengliang10.github.io/frasers-hospitality-UX2024/
-
-**Publishing:** The repository default branch is `master`. The existing GitHub Pages configuration publishes from `master` (Settings → Pages → Deploy from a branch). Changes pushed to `master` update the prototype site. `.github/workflows/pages.yml` is included as a *manual* GitHub Actions publishing alternative if the Pages source is changed to **GitHub Actions**; do not use both methods concurrently.
-
-This is a UX design research **prototype**, not the official Frasers Hospitality booking website. Forms, rates and offers are illustrative.
+Published by `.github/workflows/pages.yml` on every push to `main` (Settings → Pages → Source: GitHub Actions).
 
 ---
+
+## Typography system
+
+The prototype uses **Manrope** for clear body copy, forms and navigation, with **DM Serif Display** for editorial hospitality headlines. Each page loads `css/typography.css` after its own embedded styles to ensure consistent typography across every section.
+
+- Body text: **16px baseline**, with extended descriptions generally **17px** (previously 14px).
+- Editorial headlines: responsive **34–66px** scale; cards and supporting headings use a smaller hierarchy.
+- Form input text: **16px minimum**, reducing auto-zoom on mobile browsers.
+- Navigation, labels and footer copy are enlarged, while mobile layouts retain breakpoint adjustments.
+- Both families have system fallbacks. Google Fonts loading is optional for basic functionality.
 
 ## Background
 

@@ -1,0 +1,164 @@
+/* Frasers Hospitality UX2024 — readable, editorial typography system.
+   Intentionally loaded after page-level CSS to normalise historic typography.
+   Display: DM Serif Display. Interface / forms: Manrope.
+   Both families have platform fallbacks when webfonts cannot load. */
+:root {
+  --font-body: 'Manrope', 'Avenir Next', 'Segoe UI', Arial, sans-serif;
+  --font-display: 'DM Serif Display', Georgia, 'Times New Roman', serif;
+  --text-color: #252525;
+}
+html { font-size: 16px; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.72;
+  letter-spacing: -.012em;
+  color: var(--text-color);
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3, h4, .section-title, .hero-title,
+.prop-card-name, .listing-name, .room-card-name, .rlc-name,
+.offer-card-name, .thing-card-name, .blog-card-title, .sugg-card-img-title,
+.brand-item-name, .testimonial-quote, .es-testi-quote {
+  font-family: var(--font-display) !important;
+  font-weight: 400;
+  letter-spacing: -.022em;
+}
+h1, h2 { line-height: 1.12; text-wrap: balance; }
+h3, h4 { line-height: 1.25; }
+p, li { overflow-wrap: break-word; }
+button, input, select, textarea, option { font-family: var(--font-body); }
+button, .btn, .btn-booknow, .bw-btn { font-weight: 650; }
+
+/* Global navigation, reading hierarchy and properties */
+.util-bar { font-size: 12px; letter-spacing: .015em; }
+.nav-links li a { font-family: var(--font-body); font-size: 13px; font-weight: 650; letter-spacing: .005em; padding: 0 11px; }
+.nav-icon { font-size: 19px; }
+.btn, .btn-booknow { font-size: 14px; letter-spacing: .02em; line-height: 1.35; }
+.btn { padding: 13px 25px; }
+.btn-booknow { padding: 12px 19px; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .14em; }
+.section-title { font-size: clamp(34px, 3.6vw, 48px); }
+.section-sub { font-size: 17px; line-height: 1.72; max-width: 700px; }
+.prop-card-tag { font-size: 12px; letter-spacing: .08em; font-weight: 700; }
+.prop-card-name { font-size: 25px; }
+.prop-card-loc, .prop-card-price { font-size: 15px; }
+.prop-card-price strong { font-family: var(--font-body); font-size: 23px; font-weight: 750; }
+
+/* Hero headlines: visually confident, scaled to the viewport */
+.hero-title, .es-hero-content h1, .fw-hero-content h1 { font-size: clamp(42px, 5.3vw, 66px); letter-spacing: -.035em; }
+.page-header h1, .rooms-page-header h1, .prop-hero-name,
+.offers-hero-content h1, .city-hero-content h1, .err-heading { font-size: clamp(38px, 4.5vw, 60px); }
+.rdh-room-name { font-size: clamp(34px, 4vw, 50px); }
+.hero-eyebrow, .prop-hero-brand, .err-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .17em; }
+.page-header p, .rooms-page-header p, .offers-hero-content p,
+.city-hero-content p, .es-hero-content p, .fw-hero-content p,
+.err-subtext, .prop-hero-loc { font-size: 17px; line-height: 1.72; }
+
+/* Readable longer-form content rather than 13–14px fine print */
+.split-text p, .highlights-text p, .location-text p, .lsc-text p,
+.rdb-description p, .lux-text p, .about-city-text p, .split-intro-text p,
+.newsletter-inner p, .fw-benefits-intro p, .fw-join-inner p,
+.es-cta-content p, .faq-answer { font-size: 17px; line-height: 1.78; }
+.difference-item p, .offer-card-desc, .thing-card-desc,
+.blog-card-excerpt, .feature-card p, .showcase-card p,
+.fw-perk-item p, .fw-earn-item p, .fw-partner-card p,
+.sugg-card-body p, .listing-location, .listing-amenity,
+.rlc-subtitle, .rdb-amenity, .facility-list li, .nearby-list li,
+.lux-feature-text, .split-feature-text, .lsc-benefit, .orc-size { font-size: 15.5px; line-height: 1.72; }
+.testimonial-quote, .es-testi-quote { font-size: 19px; line-height: 1.65; }
+.faq-question { font-size: 19px; font-weight: 650; }
+
+/* Story and card titles */
+.highlights-text h2, .location-text h2, .lsc-text h2,
+.rdb-description h2, .lux-text h2, .about-city-text h2,
+.split-intro-text h2, .fw-benefits-intro h2, .es-cta-content h2,
+.newsletter-inner h2, .fw-join-inner h2 { font-size: clamp(32px, 3.3vw, 45px); }
+.difference-item h3, .feature-card h3, .fw-earn-item h3,
+.fw-perk-item h3, .prop-quick-book h3 { font-size: 23px; }
+.listing-name, .offer-card-name, .showcase-card h3,
+.thing-card-name, .blog-card-title, .sugg-card-img-title,
+.room-card-name, .orc-name { font-size: 24px; }
+.offer-card.featured .offer-card-name { font-size: 29px; }
+.rlc-name { font-size: 31px; }
+.fw-tier-name { font-size: 27px; }
+.brand-item-name { font-size: 17px; }
+.brand-item-name span { font-family: var(--font-body); font-size: 12px; }
+.fw-partner-card h4 { font-family: var(--font-body) !important; font-size: 16px; font-weight: 700; }
+
+/* Small labels now remain readable. Icons deliberately retain their original scale. */
+.awards-label, .award-badge-text, .prop-hero-award, .listing-brand,
+.listing-type, .room-card-type, .rlc-tag, .rlc-category,
+.rlc-feature-tag, .offer-badge, .offer-card-category, .showcase-card-tag,
+.thing-card-category, .blog-card-tag, .fw-tier-featured-tag,
+.fw-tier-points-label, .fw-stat-label, .fw-tier-threshold,
+.fw-join-note, .newsletter-privacy, .rdb-bc-guarantee,
+.amenity-tag, .room-spec, .rdh-property-name, .rdh-breadcrumb,
+.rdh-price-label, .es-testi-role, .es-testi-stay,
+.newsletter-privacy, .brand-item-name span { font-size: 12.5px; letter-spacing: .045em; }
+.region-tab, .prop-tab, .room-tab-btn, .offer-filter-btn,
+.room-tabs-sort, .room-tabs-sort select, .sort-select,
+.listing-price, .page-btn, .rlc-spec, .rlc-price,
+.rlc-price span, .room-card-price, .prop-price-display,
+.nearby-dist, .fw-tier-benefits li, .benefits-table td,
+.es-testi-name, .blog-card-meta, .fw-tier-points-label { font-size: 14px; }
+.prop-tab, .room-tab-btn, .region-tab, .offer-filter-btn { font-weight: 650; letter-spacing: .005em; }
+.listing-price strong, .prop-price-display strong,
+.room-card-price strong, .rlc-price strong, .rdb-bc-price,
+.rdh-price, .fw-tier-points-value, .fw-earn-rate {
+  font-family: var(--font-body); font-weight: 750; letter-spacing: -.045em;
+}
+.listing-price strong, .prop-price-display strong, .room-card-price strong { font-size: 25px; }
+
+/* Inputs stay >= 16px to avoid Safari auto-zoom and support legible booking. */
+.bw-field label, .pqb-field label, .rdb-bc-field label { font-size: 12px; font-weight: 700; letter-spacing: .09em; }
+.bw-field input, .bw-field select, .pqb-field input, .pqb-field select,
+.rdb-bc-field input, .rdb-bc-field select, .fw-join-form input,
+.newsletter-form input, .filter-search input, .room-tabs-sort select {
+  font-family: var(--font-body); font-size: 16px; font-weight: 500; min-height: 42px;
+}
+.bw-btn, .rdb-bc-btn, .fw-join-form button, .newsletter-form button {
+  font-family: var(--font-body); font-size: 14px; font-weight: 700;
+  letter-spacing: .02em; min-height: 44px;
+}
+.mobile-menu a { font-family: var(--font-body); font-size: 19px; font-weight: 600; }
+
+/* No microtype in the footer */
+.footer-col h4 { font-family: var(--font-body) !important; font-size: 12px; font-weight: 750; letter-spacing: .09em; }
+.footer-col ul li a, .footer-address, .footer-email { font-size: 13px; line-height: 1.6; }
+.footer-logo { font-family: var(--font-display); font-size: 26px; letter-spacing: -.015em; }
+.footer-logo span { font-family: var(--font-body); font-size: 11px; letter-spacing: .07em; }
+.footer-bottom { font-size: 12px; }
+.footer-social a { font-size: 15px; width: 34px; height: 34px; }
+.newsletter-privacy { color: rgba(255,255,255,.72); }
+.nav-inner { gap: 20px; }
+.footer-grid { gap: 24px; }
+
+/* Breakpoint guards prevent enlarged typography from clipping controls. */
+@media (min-width: 769px) and (max-width: 1120px) {
+  .nav-links li a { font-size: 12px; padding: 0 7px; }
+  .nav-inner { gap: 12px; }
+  .btn-booknow { padding: 10px 12px; }
+}
+@media (max-width: 768px) {
+  .hero { height: auto; min-height: 690px; }
+  .hero-content { padding-top: 90px; }
+  .hero-title, .es-hero-content h1, .fw-hero-content h1,
+  .page-header h1, .rooms-page-header h1, .prop-hero-name,
+  .offers-hero-content h1, .city-hero-content h1 { font-size: clamp(37px, 9vw, 51px); }
+  .section-title { font-size: clamp(31px, 7vw, 40px); }
+  .section-sub { font-size: 16px; }
+  .mobile-menu a { font-size: 19px; }
+  .footer-col ul li a { font-size: 14px; }
+}
+@media (max-width: 480px) {
+  .hero { min-height: 730px; }
+  .hero-content { padding-top: 70px; }
+  .hero-title { font-size: clamp(35px, 9.5vw, 44px); }
+  .section-title { font-size: 32px; }
+  .footer-grid { gap: 30px; }
+  .btn-booknow { font-size: 13px; padding: 11px 15px; }
+  .newsletter-form { flex-wrap: wrap; gap: 10px; }
+  .newsletter-form input, .newsletter-form button { flex: 1 1 100%; }
+}
